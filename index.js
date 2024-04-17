@@ -15,10 +15,12 @@ app.get('/js', (req, res) => {
     const indexPath = path.resolve(process.cwd(), '/JS/index.js');
     res.sendFile(indexPath);
 });
-app.get('/LIVRO/teste', (req, res) => {
-    const indexPath = path.resolve(process.cwd(), '/LIVRO/teste.html');
+app.get('/LIVRO/:nome_do_livro', (req, res) => {
+    const livro = req.params.nome_do_livro;
+    const indexPath = path.resolve(process.cwd(), `/LIVRO/${livro}.html`);
     res.sendFile(indexPath);
 });
+
 app.get('/livrocss', (req, res) => {
     const indexPath = path.resolve(process.cwd(), '/CSS/livro.css');
     res.sendFile(indexPath);
