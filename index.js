@@ -20,11 +20,6 @@ app.get('/LIVRO/:nome_do_livro', (req, res) => {
     const indexPath = path.resolve(process.cwd(), `/LIVRO/${livro}.html`);
     res.sendFile(indexPath);
 });
-
-app.get('/livrocss', (req, res) => {
-    const indexPath = path.resolve(process.cwd(), '/CSS/livro.css');
-    res.sendFile(indexPath);
-});
 app.get('/turn', (req, res) => {
     const indexPath = path.resolve(process.cwd(), '/JS/turn.js');
     res.sendFile(indexPath);

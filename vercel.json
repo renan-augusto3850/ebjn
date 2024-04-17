@@ -1,1 +1,8 @@
-{ "version": 2, "rewrites": [{ "source": "/(.*)", "destination": "/" }] }
+{ "version": 2, 
+"rewrites": [
+    { "source": "/(.*)", "destination": "/" },
+    {"source": "/livrocss", "destination": "/CSS/livro.css"},
+    {"source": "/css", "destination": "/CSS/index.css"},
+    { "source": "/LIVRO/:nome_do_livro", "destination": "/LIVRO/:nome_do_livro(.*)" }
+] 
+}
