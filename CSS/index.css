@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+body{
+    text-align: center;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: yellow;
+    padding-top: 50px;
+    font-family: 'Roboto';
+    margin-left: -3px;
+}
+header{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    background-color: rgb(10, 85, 247);
+    color: white;
+    font-family: 'Rubik';
+    width: 100%;
+    z-index: 9999;
+}
+header > i{
+    position: absolute;
+    left: 16px;
+    top: 34%;
+    font-size: 26px;
+}
+.livros, .idades{
+    width: 100%;
+    background-color: red;
+    padding: 10px;
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    margin-top: 50px;
+    border: solid 2px black;
+    left: 0;
+}
+.idades{
+    justify-content: center;
+}
+.l{
+    background-color: green;
+    padding: 26px 34px;
+    border-radius: 15px;
+    font-size: 26px;
+}
+.dez{
+    background-color: rgb(98, 98, 233);
+    padding: 26px;
+    border-radius: 15px;
+    font-size: 26px;
+}
+.doze{
+    background-color: rgb(236, 236, 3);
+    padding: 26px;
+    border-radius: 15px;
+    font-size: 26px;
+}
+.quatorze{
+    background-color: orange;
+    padding: 26px;
+    border-radius: 15px;
+    font-size: 26px;
+}
+.container > img{
+    width: 150px;
+    height: 200px;
+}
+.container{
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 1px 2px 5px black;
+    padding: 38px;
+    margin: 10px auto;
+}
+a{
+    text-decoration: none;
+    color: white;
+    background-color: blue;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px;
+    font-family: 'Rubik';
+}

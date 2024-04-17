@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+    <title>E-Biblioteca - Teste</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css">
+    <link rel="stylesheet" href="/livrocss">
+    <script src="https://kit.fontawesome.com/e77c01ed94.js" crossorigin="anonymous"></script>
+</head>
+<html lang="pt-br">
+    <body>
+        <header>
+            <h1>E-Biblioteca</h1>
+        </header>
+        <div id="flipbook">
+            <div class="hard">
+                <h1>Teste</h1>
+                <br>
+                De: Renan Augusto, Rosa Maria, Dafne
+            </div>
+            <div class="hard"></div>
+            <div class="page">
+                <h3>Ola.</h3>
+                <p>Este e uma biblioteca digital completamente gratuita.</p>
+                <p>Queremos promover a leitura na escola e no sistema de ensino</p>
+                <p>Espero que gostem da experiencia.</p>
+            </div>
+	        <div class="page"> Page 2 </div>
+	        <div class="page"> Page 3 </div>
+	        <div class="page"> Page 4 </div>
+        </div>
+        <br>
+        <button><i class="fa-solid fa-book"></i></button>
+    </body>
+</html>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="/turn"></script>
+<script type="text/javascript">
+	$("#flipbook").turn({
+		width: 500,
+		height: 300,
+		autoCenter: true
+	});
+</script>

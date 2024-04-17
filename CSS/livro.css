@@ -1,0 +1,31 @@
+body{
+    height: 100vh;
+    align-items: center;
+    background-color: chartreuse;
+    overflow: hidden;
+    font-family: sans-serif;
+}
+.page{
+    background-color: white;
+}
+#flipbook{
+    top: 30%;
+    left: 30%;
+}
+.hard{
+    background-color: gray;
+    color: white;
+}
+button{
+    position: absolute;
+    background-color: transparent;
+    border: transparent;
+    top: 90%;
+    left: 30%;
+}
+i{
+    font-size: 26px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+}

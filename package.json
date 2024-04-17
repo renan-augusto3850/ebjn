@@ -1,0 +1,20 @@
+{
+  "name": "e-biblioteca",
+  "version": "1.0.0",
+  "description": "Bibliteca digital da Escola Municipal Jose Neri de Oliveira",
+  "main": "index.js",
+  "type" : "module",
+  "scripts": {
+    "test": "node ."
+  },
+  "keywords": [
+    "biblioteca",
+    "library",
+    "school"
+  ],
+  "author": "Renan Augusto, Dafne Matias, Rosa Maria",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
