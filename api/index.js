@@ -1,5 +1,8 @@
 import express from 'express';
 import path from 'path';
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+injectSpeedInsights();
 
 const app = express();
 

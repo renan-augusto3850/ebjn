@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Bibliteca digital da Escola Municipal Jose Neri de Oliveira",
   "main": "index.js",
-  "type" : "module",
+  "type": "module",
   "scripts": {
     "test": "node api/index.js"
   },
@@ -15,6 +15,7 @@
   "author": "Renan Augusto, Dafne Matias, Rosa Maria",
   "license": "MIT",
   "dependencies": {
+    "@vercel/speed-insights": "^1.0.10",
     "express": "^4.19.2"
   }
 }
