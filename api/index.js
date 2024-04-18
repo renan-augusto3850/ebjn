@@ -31,7 +31,7 @@ app.get('/manifest', (req, res) => {
     res.sendFile(indexPath);
 });
 app.get('/icon', (req, res) => {
-    const indexPath = path.resolve(process.cwd(), 'ICON/icon.png');
+    const indexPath = path.resolve(process.cwd(), 'ICON/Icon.png');
     res.sendFile(indexPath);
 });
 app.listen(3000, () => {
