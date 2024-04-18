@@ -1,0 +1,42 @@
+nav > .voltar{
+    position: absolute;
+    left: 16px;
+    top: 26%;
+    font-size: 26px;
+    background-color: transparent;
+    border: transparent;
+    color: white;
+}
+.cadastro-box{
+    border: solid 2px black;
+    border-radius: 15px;
+    background-color: white;
+    width: 60%;
+    margin: 20% auto;
+    height: 200px;
+    padding: 5px;
+}
+input{
+    margin: 5px;
+    width: 60%;
+    border: transparent;
+    border-bottom: solid 2px gray;
+}
+input:focus{
+    outline: none;
+    border-bottom: solid 2px blue;
+}
+#email{
+    margin-top: 30px;
+}
+#cadastrar{
+    position: relative;
+    margin-top: 20%;
+    background-color: blue;
+    border: transparent;
+    color: white;
+    font-family: 'Roboto';
+    width: 66px;
+    height: 36px;
+    border-radius: 20px;
+}

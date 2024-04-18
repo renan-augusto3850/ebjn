@@ -23,9 +23,18 @@ button{
     top: 90%;
     left: 30%;
 }
-i{
+.fa-book{
     font-size: 26px;
     background-color: white;
     padding: 10px;
     border-radius: 8px;
+}
+nav > .voltar{
+    position: absolute;
+    left: 16px;
+    top: 26%;
+    font-size: 26px;
+    background-color: transparent;
+    border: transparent;
+    color: white;
 }

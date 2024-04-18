@@ -2,15 +2,17 @@
 <head>
     <title>E-Biblioteca - Teste</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/index.css">
-    <link rel="stylesheet" href="/CSS/livro.css">
+    <link rel="stylesheet" href="/css/index">
+    <link rel="stylesheet" href="/css/livro">
+    <link rel="manifest" href="/manifest">
     <script src="https://kit.fontawesome.com/e77c01ed94.js" crossorigin="anonymous"></script>
 </head>
 <html lang="pt-br">
     <body>
-        <header>
+        <nav>
+            <button class="voltar" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></button>
             <h1>E-Biblioteca</h1>
-        </header>
+        </nav>
         <div id="flipbook">
             <div class="hard">
                 <h1>Teste</h1>
@@ -33,7 +35,7 @@
     </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="/JS/turn.js"></script>
+<script src="/js/turn"></script>
 <script type="text/javascript">
 	$("#flipbook").turn({
 		width: 500,

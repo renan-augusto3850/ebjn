@@ -9,7 +9,7 @@ body{
     font-family: 'Roboto';
     margin-left: -3px;
 }
-header{
+nav{
     position: fixed;
     display: flex;
     justify-content: center;
@@ -21,11 +21,18 @@ header{
     width: 100%;
     z-index: 9999;
 }
-header > i{
+nav > .fa-bars{
     position: absolute;
     left: 16px;
-    top: 34%;
+    top: 25%;
     font-size: 26px;
+}
+nav > .usuario{
+    position: absolute;
+    right: 16px;
+    top: 20%;
+    font-size: 26px;
+    color: white;
 }
 .livros, .idades{
     width: 100%;
@@ -75,6 +82,10 @@ header > i{
     box-shadow: 1px 2px 5px black;
     padding: 38px;
     margin: 10px auto;
+}
+button{
+    background-color: transparent;
+    border: transparent;
 }
 a{
     text-decoration: none;
