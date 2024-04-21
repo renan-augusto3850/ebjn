@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,700;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root{
+    --blue: #1DA6E1;
+    --yellow: #FFD321;
+}
 body{
     text-align: center;
     width: 100%;
     overflow-x: hidden;
-    background-color: yellow;
+    background-color: var(--yellow);
     padding-top: 50px;
     font-family: 'Roboto';
     margin-left: -3px;
@@ -15,11 +19,50 @@ nav{
     justify-content: center;
     top: 0;
     left: 0;
-    background-color: rgb(10, 85, 247);
+    background-color: var(--blue);
     color: white;
     font-family: 'Rubik';
     width: 100%;
+    z-index: 9988;
+}
+#user-data{
+    position: absolute;
+    display: none;
+    background-color: white;
+    width: 200px;
+    height: 106px;
+    padding: 5px;
+    right: 2px;
+    top: 56px;
+}
+#menu{
+    position: absolute;
+    left: -100%;
+    background-color: white;
+    top: 0;
+    padding: 40px 36px 36px 36px;
+    height: 100%;
     z-index: 9999;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
+}
+#close-menu{
+    position: relative;
+    top: -20px;
+    left: -40px;
+    font-size: 16px;
+}
+.progress{
+    height: 14px;
+    background-color: var(--blue);
+    width: 25%;
+    border-radius: 5px;
+}
+.progress > label{
+    color: white;
+}
+.progress-border{
+    width: 150px;
+    margin-left: 20px;
 }
 nav > .fa-bars{
     position: absolute;
@@ -36,7 +79,7 @@ nav > .usuario{
 }
 .livros, .idades{
     width: 100%;
-    background-color: red;
+    background-color: rgb(64, 201, 201);
     padding: 10px;
     display: flex;
     gap: 16px;
