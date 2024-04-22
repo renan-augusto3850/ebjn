@@ -26,3 +26,9 @@ document.getElementById('close-menu').addEventListener('click', () => {
     document.body.style.overflowY = 'auto';
     document.getElementById('menu').style.left = '-100%';
 });
+document.getElementById('abrir-teste').addEventListener('click', ()=> {
+    document.getElementById('teste').style.display = 'block';
+});
+document.getElementById('fechar-teste').addEventListener('click', ()=> {
+    document.getElementById('teste').style.display = 'none';
+});
