@@ -15,12 +15,18 @@
   "author": "Renan Augusto, Dafne Matias, Rosa Maria",
   "license": "MIT",
   "dependencies": {
-    "@fastify/formbody": "^7.4.0",
     "@vercel/speed-insights": "^1.0.10",
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
     "crypto": "^1.0.1",
+    "crypto-js": "^4.2.0",
+    "cryptojs": "^2.5.3",
     "dotenv": "^16.4.5",
-    "fastify": "^4.26.2",
+    "express": "^4.19.2",
+    "googleapis": "^134.0.0",
+    "multer": "^1.4.5-lts.1",
+    "pdftopic": "^1.0.4-alpha",
     "postgres": "^3.4.4"
   }
 }

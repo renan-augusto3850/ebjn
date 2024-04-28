@@ -26,9 +26,9 @@ document.getElementById('close-menu').addEventListener('click', () => {
     document.body.style.overflowY = 'auto';
     document.getElementById('menu').style.left = '-100%';
 });
-document.getElementById('abrir-teste').addEventListener('click', ()=> {
-    document.getElementById('teste').style.display = 'block';
+document.getElementById('abrir-es5g52jye').addEventListener('click', ()=> {
+    document.getElementById('es5g52jye').style.display = 'block';
 });
-document.getElementById('fechar-teste').addEventListener('click', ()=> {
-    document.getElementById('teste').style.display = 'none';
+document.getElementById('fechar-es5g52jye').addEventListener('click', ()=> {
+    document.getElementById('es5g52jye').style.display = 'none';
 });

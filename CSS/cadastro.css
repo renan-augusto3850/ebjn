@@ -16,6 +16,18 @@ nav > .voltar{
     height: 200px;
     padding: 5px;
 }
+.tipos-usuarios{
+    width: 50%;
+    display: flex;
+    margin: auto;
+}
+.box{
+    background-color: white;
+    padding: 10px 6px;
+    margin: 6px;
+    border-radius: 15px;
+    width: 400px;
+}
 input{
     margin: 5px;
     width: 60%;

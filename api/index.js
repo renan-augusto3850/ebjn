@@ -1,16 +1,23 @@
-import Fastify from 'fastify';
+import Express from 'express';
 import path from 'path';
 import { injectSpeedInsights } from '@vercel/speed-insights';
 import postgres from 'postgres';
 import bcrypt from 'bcrypt';
 import 'dotenv/config';
-import fs from 'fs';
 import {randomUUID} from "crypto";
-import formbody from '@fastify/formbody';
+//import ebjnDrive from './drive.js';
+import bodyParser from 'body-parser';
+//import cryptoJS from 'crypto-js';
+//import cookieParser from 'cookie-parser';
+//import multer from 'multer';
+//import { google } from 'googleapis';
 
-const app = Fastify();
+//const ebjn = new ebjnDrive();
+const app = Express();
+//const upload = multer();
+app.use(bodyParser.json());
+//app.use(cookieParser());
 injectSpeedInsights();
-app.register(formbody);
 
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 const sql = postgres({
@@ -24,29 +31,55 @@ const sql = postgres({
         options: `project=${ENDPOINT_ID}`,
     },
 });
+//const auth = ebjn.createAuth();
 
 app.get('/', (req, res) => {
-    const archive = fs.createReadStream(path.resolve(process.cwd(), 'index.html'));
-    res.type('text/html').send(archive);
+    const archive = path.resolve(process.cwd(), 'index.html');
+    res.sendFile(archive);
 });
 app.get('/css/:stylesheet', (req, res) => {
     const stylesheet = req.params.stylesheet;
-    const archive = fs.createReadStream(path.resolve(process.cwd(), `CSS/${stylesheet}.css`));
-    res.send(archive);
+    const archive = path.resolve(process.cwd(), `CSS/${stylesheet}.css`);
+    res.sendFile(archive);
 });
 app.get('/js/:script', (req, res) => {
     const script = req.params.script;
-    const archive = fs.createReadStream(path.resolve(process.cwd(), `JS/${script}.js`));
-    res.type('script/js').send(archive);
+    const archive = path.resolve(process.cwd(), `JS/${script}.js`);
+    res.sendFile(archive);
 });
+/*app.get('/googleLogin', (req, res) => {
+    const authUrl = auth.generateAuthUrl({
+        access_type: 'offline', // Solicita um token de atualização
+        scope: ['https://www.googleapis.com/auth/drive'],
+    });
+    res.redirect(authUrl);
+});
+app.get('/userCallback', async(req, res) => {
+    const { code } = req.query;
+    const id = req.cookies.username;
+    const { tokens } = await auth.getToken(code);
+    google.options({ auth });
+    await sql`insert into googleoauth (authToken, id) values(${cryptoJS.AES.encrypt(JSON.stringify(tokens), id).toString()}, "nothing" )`;
+    res.redirect("/");
+});*/
 app.get('/LIVRO/:nome_do_livro', (req, res) => {
     const livro = req.params.nome_do_livro;
-    const archive = fs.createReadStream(path.resolve(process.cwd(), `LIVRO/${livro}.html`));
-    res.type('text/html').send(archive);
+    const archive = path.resolve(process.cwd(), `LIVRO/${livro}.html`);
+    res.sendFile(archive);
+});
+app.get('/SERIE/:nome_da_serie', (req, res) => {
+    const serie = req.params.nome_da_serie;
+    const archive = path.resolve(process.cwd(), `SERIE/${serie}.html`);
+    res.sendFile(archive);
+});
+app.get('/assets/:image', (req, res) => {
+    const image = req.params.image;
+    const archive = path.resolve(process.cwd(), `ASSETS/${image}.png`);
+    res.sendFile(archive);
 });
 app.get('/cadastro', (req, res) => {
-    const archive = fs.createReadStream(path.resolve(process.cwd(), 'cadastro.html'));
-    res.type('text/html').send(archive);
+    const archive = path.resolve(process.cwd(), 'cadastro.html');
+    res.sendFile(archive);
 });
 app.post('/usuario', async(req, res) => {
     const usuario = req.body;
@@ -72,16 +105,25 @@ app.post('/login', async(req, res) => {
     }
 });
 app.get('/login', (req, res) => {
-    const archive = fs.createReadStream(path.resolve(process.cwd(), 'login.html'));
-    res.type('text/html').send(archive);
+    const archive = path.resolve(process.cwd(), 'login.html');
+    res.sendFile(archive);
 });
+/*app.get('/upload', (req, res) => {
+    const archive = path.resolve(process.cwd(), 'upload.html');
+    res.sendFile(archive);
+});
+app.post('/upload', upload.array('files'), (req, res) => {
+    ebjn.upload(req.files).then(() => {
+        res.send("<h3>ok</h3>");
+    });
+});*/
 app.get('/manifest', (req, res) => {
-    const archive = fs.createReadStream(path.resolve(process.cwd(), 'MANIFEST/manifest.json'));
-    res.type('application/json').send(archive);
+    const archive = path.resolve(process.cwd(), 'MANIFEST/manifest.json');
+    res.sendFile(archive);
 });
 app.get('/icon', (req, res) => {
-    const archive = fs.createReadStream(path.resolve(process.cwd(), 'ICON/Icon.png'));
-    res.type('image/png').send(archive);
+    const archive = path.resolve(process.cwd(), 'ICON/Icon.png');
+    res.sendFile(archive);
 });
 app.listen({ port: 3000 }, (err, address) => {
     if(err) {
