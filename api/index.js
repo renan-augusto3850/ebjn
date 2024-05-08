@@ -67,6 +67,12 @@ app.get('/LIVRO/:nome_do_livro', (req, res) => {
     const archive = path.resolve(process.cwd(), `LIVRO/${livro}.html`);
     res.sendFile(archive);
 });
+app.get('/PAGES/:endereco/:page', (req, res) => {
+    const add = req.params.endereco;
+    const page = req.params.page;
+    const archive = path.resolve(process.cwd(), `PAGES/${add}/${page}`);
+    res.sendFile(archive);
+});
 app.get('/SERIE/:nome_da_serie', (req, res) => {
     const serie = req.params.nome_da_serie;
     const archive = path.resolve(process.cwd(), `SERIE/${serie}.html`);

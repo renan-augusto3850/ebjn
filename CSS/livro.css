@@ -5,12 +5,14 @@ body{
     overflow: hidden;
     font-family: sans-serif;
 }
-.page{
+.page, .hard{
     background-color: white;
+    width: 400px;
+    height: 500px;
 }
 #flipbook{
-    top: 30%;
-    left: 30%;
+    top: 1%;
+    left: 1%;
 }
 .hard{
     background-color: gray;
