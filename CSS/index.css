@@ -13,6 +13,12 @@ body{
     font-family: 'Roboto';
     margin-left: -3px;
 }
+.simple-link{
+    background-color: transparent; 
+    color: blue; 
+    text-decoration: solid 1px blue; 
+    margin-left: -20px;
+}
 .back-blur{
     display: none;
     position: fixed;
@@ -177,6 +183,14 @@ a, .ler-button{
     text-decoration: none;
     color: white;
     background-color: blue;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px;
+    font-family: 'Rubik';
+}
+.disamble-button{
+    text-decoration: none;
+    color: white;
+    background-color: gray;
     padding: 10px 20px 10px 20px;
     border-radius: 20px;
     font-family: 'Rubik';

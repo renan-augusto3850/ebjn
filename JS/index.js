@@ -32,3 +32,9 @@ document.getElementById('abrir-es5g52jye').addEventListener('click', ()=> {
 document.getElementById('fechar-es5g52jye').addEventListener('click', ()=> {
     document.getElementById('es5g52jye').style.display = 'none';
 });
+document.getElementById('abrir-mgeuvvebd').addEventListener('click', ()=> {
+    document.getElementById('mgeuvvebd').style.display = 'block';
+});
+document.getElementById('fechar-mgeuvvebd').addEventListener('click', ()=> {
+    document.getElementById('mgeuvvebd').style.display = 'none';
+});
