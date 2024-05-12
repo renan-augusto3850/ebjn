@@ -126,7 +126,8 @@ app.post('/user', async(req, res) => {
         res.status(201).send({"Result": "ok"});
     }
     if(query.operation == "read-get") {
-        const page = await sql`select page from bookprogress where placeholder = ${query.placeholder} and id = ${query.id}`;
+        const email = await sql`select email from loginsessions where id = ${query.id}`;
+        const page = await sql`select page from bookprogress where placeholder = ${query.placeholder} and email = ${email}`;
         res.send({result: "sucessfuly", page: page});
     }
 });
