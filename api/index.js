@@ -127,7 +127,7 @@ app.post('/user', async(req, res) => {
     }
     if(query.operation == "read-get") {
         const page = await sql`select page from bookprogress where placeholder = ${query.placeholder} and id = ${query.id}`;
-        res.status(201).send({"result": "sucessfuly", "page": page});
+        res.send({result: "sucessfuly", page: page});
     }
 });
 app.get('/login', (req, res) => {

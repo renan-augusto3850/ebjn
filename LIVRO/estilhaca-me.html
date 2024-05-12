@@ -328,33 +328,46 @@
     return null;
     }
     const user = getMultiValueCookie("username");
-    const id = user[0];
-    var query = {
-        operation: 'page-get',
-        id: id,
-        placeholder: 'estilhaca-me'
-    };
-    console.log("Fazendo fetch");
-    fetch("/user", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(query) 
-    })
-    .then(response => {response.json(); console.log("fazendo")})
-        .then(data => {
-            console.log(data);
-            if(data[0].page) {
-                $("#flipbook").turn("page", data[0].page);
-                let oldPage = $("#flipbook").turn("page");
-                setInterval(() => {
-                    let actualPage = $("#flipbook").turn("page");
-                    if(actualPage != oldPage) {
-                        alert("As paginas mudaram");
-                        oldPage = actualPage;
-                    }
-                }, 3000);
-            }
+    if(user) {
+        const id = user[0];
+        const query = {
+            operation: 'read-get',
+            id: id,
+            placeholder: 'estilhaca-me'
+        };
+        console.log("Fazendo fetch");
+        fetch('/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(query)
+        }).then(response => response.json())
+            .then(page => {
+                console.log(page);
+                if(page.page.length != 0) {
+                    $("#flipbook").turn("page", page.page[0].page);
+                }
         }).catch(error => console.error(error));
-    </script>
+        let oldPage = $("#flipbook").turn("page");
+        setInterval(() => {
+            let actualPage = $("#flipbook").turn("page");
+            if(actualPage != oldPage) {
+                const data = {
+                    operation: "read-update",
+                    id: id,
+                    pageNumber: actualPage,
+                    placeholder: "estilhaca-me"
+                };
+                fetch('/user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }).catch(error => console.error(error));
+                oldPage = actualPage;
+            }
+        }, 3000);
+    }
+</script>
