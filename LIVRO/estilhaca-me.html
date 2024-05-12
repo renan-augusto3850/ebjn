@@ -343,10 +343,10 @@
         body: JSON.stringify(query) 
     })
     .then(response => {response.json(); console.log("fazendo")})
-        .then(page => {
-            console.log(page);
-            if(page[0].page) {
-                $("#flipbook").turn("page", page[0].page);
+        .then(data => {
+            console.log(data);
+            if(data[0].page) {
+                $("#flipbook").turn("page", data[0].page);
                 let oldPage = $("#flipbook").turn("page");
                 setInterval(() => {
                     let actualPage = $("#flipbook").turn("page");
