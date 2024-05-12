@@ -3,7 +3,7 @@ function getMultiValueCookie(name) {
     for (let i = 0; i < cookieArray.length; i++) {
         const cookie = cookieArray[i].split('=');
         if (cookie[0] === name) {
-            return cookie[1].split(';');
+            return cookie[1].split(',');
         }
     }
     return null;

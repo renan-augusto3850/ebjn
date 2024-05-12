@@ -1,4 +1,11 @@
-POST http://localhost:3000/usuario
+POST http://localhost:3000/user
 Content-Type: application/json
 
-{ "name": "Renan", "email": "terreorenan68@gmail.com", "password": "renan2024.com" }
+{ "operation": "read-update", "id": "7d532d4c-17ac-4ef1-8efe-aaff83a50df4", "pageNumber": 9, "placeholder": "melhor-do-que-nos-filmes" }
+
+###
+
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{ "operation": "read-get", "id": "7d532d4c-17ac-4ef1-8efe-aaff83a50df4", "placeholder": "melhor-do-que-nos-filmes" }

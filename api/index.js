@@ -87,6 +87,10 @@ app.get('/cadastro', (req, res) => {
     const archive = path.resolve(process.cwd(), 'cadastro.html');
     res.sendFile(archive);
 });
+app.get('/sobre', (req, res) => {
+    const archive = path.resolve(process.cwd(), 'sobre.html');
+    res.sendFile(archive);
+});
 app.post('/usuario', async(req, res) => {
     const usuario = req.body;
     const securePassword = await bcrypt.hash(usuario.password, 10);
@@ -108,6 +112,22 @@ app.post('/login', async(req, res) => {
         res.send({"result": true, id: id, name: usuario.name});
     } else{
         res.send({"result": false});
+    }
+});
+app.post('/user', async(req, res) => {
+    const query = req.body;
+    if(query.operation == "read-update") {
+        const email = await sql`select email from loginsessions where id = ${query.id}`;
+        await sql`INSERT INTO bookprogress (email, id, page, placeholder)
+        VALUES (${email}, ${query.id}, ${query.pageNumber}, ${query.placeholder})
+        ON CONFLICT (email, placeholder) DO UPDATE
+        SET page = ${query.pageNumber};
+        `;
+        res.status(201).send({"Result": "ok"});
+    }
+    if(query.operation == "read-get") {
+        const page = await sql`select page from bookprogress where placeholder = ${query.placeholder} and id = ${query.id}`;
+        res.status(201).send({"result": "sucessfuly", "page": page});
     }
 });
 app.get('/login', (req, res) => {

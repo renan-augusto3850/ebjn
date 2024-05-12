@@ -8,8 +8,8 @@ if(window.mobileCheck()) {
 	    width: 400,
 	    height: 700,
 	    autoCenter: true,
+        display: 'single'
     });
-    $("#flipbook").turn('display', 'single');
 } else {
     $("#flipbook").turn({
 	    width: 900,

@@ -33,6 +33,7 @@ body{
     width: 100px;
     border: solid 2px black;
     border-radius: 15px;
+    z-index: 9999;
 }
 .book-menu > button{
     border: solid 1px black;
