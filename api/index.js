@@ -119,7 +119,7 @@ app.post('/user', async(req, res) => {
     if(query.operation == "read-update") {
         const email = await sql`select email from loginsessions where id = ${query.id}`;
         await sql`INSERT INTO bookprogress (email, id, page, placeholder)
-        VALUES (${email}, ${query.id}, ${query.pageNumber}, ${query.placeholder})
+        VALUES (${email[0].email}, ${query.id}, ${query.pageNumber}, ${query.placeholder})
         ON CONFLICT (email, placeholder) DO UPDATE
         SET page = ${query.pageNumber};
         `;
@@ -127,7 +127,7 @@ app.post('/user', async(req, res) => {
     }
     if(query.operation == "read-get") {
         const email = await sql`select email from loginsessions where id = ${query.id}`;
-        const page = await sql`select page from bookprogress where placeholder = ${query.placeholder} and email = ${email}`;
+        const page = await sql`select page from bookprogress where placeholder = ${query.placeholder} and email = ${email[0].email}`;
         res.send({result: "sucessfuly", page: page});
     }
 });
