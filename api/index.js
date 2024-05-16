@@ -73,6 +73,34 @@ app.get('/PAGES/:endereco/:page', (req, res) => {
     const archive = path.resolve(process.cwd(), `PAGES/${add}/${page}`);
     res.sendFile(archive);
 });
+app.get('/espaco-escola/:page', (req, res) => {
+    const page = req.params.page;
+    const archive = path.resolve(process.cwd(), `EDUCATOR-SPACE/${page}.html`);
+    res.sendFile(archive);
+});
+app.post('/book', async(req, res) => {
+    const query = req.body;
+    if(query.operation == "book-add") {
+        await sql`insert into booktables (title, author, placeholder, units) values(${query.title}, ${query.author}, ${query.placeholder}, ${query.units})`;
+        res.send({result: "sucessfuly"});
+    }
+    if(query.operation == "book-get") {
+        const books = await sql`select * from booktables`;
+        res.send(books);
+    }
+    if(query.operation == "book-consult-add") {
+        await sql`insert into bookconsult (emailorname, placeholder, startdate, title) values(${query.emailOrname}, ${query.placeholder}, ${query.startDate}, ${query.title})`;
+        res.send({result: "sucessfuly"});
+    }
+    if(query.operation == "book-consult-get") {
+        const consults = await sql`select * from bookconsult`;
+        res.send(consults);
+    }
+    if(query.operation == "book-consult-finish") {
+        await sql`delete from bookconsult where emailorname = ${query.emailOrname}`;
+        res.send({result: "sucessfuly"});
+    }
+});
 app.get('/SERIE/:nome_da_serie', (req, res) => {
     const serie = req.params.nome_da_serie;
     const archive = path.resolve(process.cwd(), `SERIE/${serie}.html`);
