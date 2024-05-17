@@ -45,8 +45,8 @@
             <h1>EBJN</h1>
            <button onclick="window.location.assign('/cadastro')" class="usuario" id="u"><i class="fa-solid fa-user-plus"></i></button>
         </nav>
-        <h1>Ola, $user-name</h1>
-        <h2>Diário de consulta:</h2>
+        <h2>Ola <span></span>.</h2>
+        <h3>Diário de consulta:</h3>
         <table id="consult-list">
           <tr>
             <th>Livro:</th>
@@ -55,12 +55,13 @@
             <th>Concluir:</th>
           </tr>
         </table>
-        <h2>Livros disponiveis:</h2>
+        <h3>Livros disponiveis:</h3>
         <table id="book-list">
             <tr>
               <th>Livro:</th>
               <th>Autor(a):</th>
               <th>Unidades:</th>
+              <th>Excluir:</th>
             </tr>
           </table>
           <br>
@@ -73,23 +74,22 @@
               <br>
               <input type="number" id="book-units-form" placeholder="Unidades:" required>
               <br>
-              <button id="book-submit-form" class="ler-button">Adicionar ></button>
+              <button id="book-submit-form" class="primary-button">Adicionar ></button>
             </div>
           </div>
           <br>
-          <button class="ler-button" id="book-consult" style="margin-top: 5px;"><i class="fa-solid fa-plus"></i> Diario de consulta</button>
-          <button class="ler-button" id="book-add" style="margin-top: 5px;"><i class="fa-solid fa-add"></i> Livro</button>
+          <button class="primary-button" id="book-consult" style="margin-top: 5px;"><i class="fa-solid fa-plus"></i> Diario de consulta</button>
+          <button class="primary-button" id="book-add" style="margin-top: 5px;"><i class="fa-solid fa-add"></i> Livro</button>
           <br>
           <div class="consult-form" id="consult-form">
             <div class="form-book">
               <input type="text" id="consult-form-emailorname" placeholder="Email da pessoa ou nome:">
               <br>
-              <input type="text" id="consult-form-author" placeholder="Autor(a) do livro:">
               <p>Livro:</p>
               <select id="book-option">
               </select>
               <br>
-              <button id="consult-submit-form" class="ler-button">Adicionar ></button>
+              <button id="consult-submit-form" class="primary-button">Adicionar ></button>
             </div>
           </div>
     </body>

@@ -179,7 +179,16 @@ button{
     background-color: transparent;
     border: transparent;
 }
-a, .ler-button{
+nav > .voltar{
+    position: absolute;
+    left: 16px;
+    top: 26%;
+    font-size: 26px;
+    background-color: transparent;
+    border: transparent;
+    color: white;
+}
+a, .primary-button{
     text-decoration: none;
     color: white;
     background-color: blue;

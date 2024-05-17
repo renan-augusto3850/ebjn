@@ -45,3 +45,6 @@ tr:nth-child(even) {
     height: 200px;
     margin: auto;
 }
+.fa-trash, .fa-check{
+    margin: 0 50% 0 50%;
+}

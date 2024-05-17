@@ -1,12 +1,3 @@
-nav > .voltar{
-    position: absolute;
-    left: 16px;
-    top: 26%;
-    font-size: 26px;
-    background-color: transparent;
-    border: transparent;
-    color: white;
-}
 .livros-full{
     display: grid;
     background-color: rgb(64, 201, 201);

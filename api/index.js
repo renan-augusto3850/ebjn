@@ -88,6 +88,10 @@ app.post('/book', async(req, res) => {
         const books = await sql`select * from booktables`;
         res.send(books);
     }
+    if(query.operation == "book-delete") {
+        await sql`delete from booktables where title = ${query.title}`;
+        res.send({result: "sucessfuly"});
+    }
     if(query.operation == "book-consult-add") {
         await sql`insert into bookconsult (emailorname, placeholder, startdate, title) values(${query.emailOrname}, ${query.placeholder}, ${query.startDate}, ${query.title})`;
         res.send({result: "sucessfuly"});
