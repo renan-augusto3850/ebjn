@@ -9,6 +9,15 @@
     <meta name="description" content="Biblioteca Digital da Escola Municipal José Neri de Oliveira.">
     <meta name="author" content="Renan Augusto, Rosa Maria, Dafne Matias, Maria Yasmin">
     <script src="https://kit.fontawesome.com/e77c01ed94.js" crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TGJ8RLB5P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-3TGJ8RLB5P');
+    </script>
 </head>
 <html lang="pt-br">
     <body>
@@ -44,10 +53,8 @@
            <button onclick="window.location.assign('/cadastro')" class="usuario" id="u"><i class="fa-solid fa-user-plus"></i></button>
         </nav>
         <div id="user-data">
-            <h2>Ola user!</h2>
-            <div class="progress-border">
-                <div class="progress"><label>25%</label></div>
-            </div>
+            <h2>Ola <span>user</span>!</h2>
+            <label id="pnts"><i class="fa-solid fa-circle-half-stroke"></i>0 Pnts.</label>
         </div>
         <h2>Bem Vindo a EBJN</h2>
         <div class="back-blur" id="es5g52jye">

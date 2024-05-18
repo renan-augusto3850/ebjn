@@ -8,4 +8,4 @@ Content-Type: application/json
 POST http://localhost:3000/user
 Content-Type: application/json
 
-{ "operation": "read-get", "id": "7d532d4c-17ac-4ef1-8efe-aaff83a50df4", "placeholder": "estilhaca-me" }
+{ "operation": "pnts-get", "id": "7d532d4c-17ac-4ef1-8efe-aaff83a50df4", "pnts": -5 }

@@ -75,14 +75,14 @@ nav{
     z-index: 9988;
 }
 #user-data{
-    position: absolute;
+    position: fixed;
     display: none;
     background-color: white;
     width: 200px;
+    border: solid 2px black;
     height: 106px;
     padding: 5px;
-    right: 2px;
-    top: 56px;
+    right: 5px;
 }
 #menu{
     position: fixed;
@@ -99,6 +99,10 @@ nav{
     top: -20px;
     left: -40px;
     font-size: 16px;
+}
+.fa-circle-half-stroke{
+    margin: 2px;
+    color: yellow;
 }
 .progress{
     height: 14px;

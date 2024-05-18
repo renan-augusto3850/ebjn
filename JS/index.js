@@ -12,9 +12,23 @@ const cookie = getMultiValueCookie('username');
 if(cookie) {
     document.querySelector('.fa-user-plus').className = 'fa-solid fa-user';
     const userButton = document.getElementById('u');
+    const userDataPanel = document.getElementById('user-data');
     userButton.setAttribute('onclick', '');
+    fetch('/user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({operation: "pnts-get", id: cookie[0]})
+    }).then(response => response.json())
+        .then(result => {
+            console.log(result.result);
+            if(result[0].pnts){
+                document.getElementById('pnts').innerHTML = `<i class="fa-solid fa-circle-half-stroke"></i>${result[0].pnts} Pnts.`;
+            }
+    }).catch(error => console.error(error));
     userButton.addEventListener('click', () => {
-        console.log("teste");
+        userDataPanel.style.display = 'block';
     });
 
 }

@@ -162,6 +162,18 @@ app.post('/user', async(req, res) => {
         const page = await sql`select page from bookprogress where placeholder = ${query.placeholder} and email = ${email[0].email}`;
         res.send({result: "sucessfuly", page: page});
     }
+    if(query.operation == "pnts-get") {
+        const pnts = await sql`select pnts from pntstable where id = ${query.id}`;
+        res.send(pnts);
+    }
+    if(query.operation == "pnts-add") {
+        await sql`INSERT INTO pntstable (id, pnts)
+        VALUES (${query.id}, ${query.pnts})
+        ON CONFLICT (id) 
+        DO UPDATE 
+        SET pnts = pntstable.pnts + EXCLUDED.pnts`;
+        res.send({result: "sucessfuly"});
+    }
 });
 app.get('/login', (req, res) => {
     const archive = path.resolve(process.cwd(), 'login.html');
