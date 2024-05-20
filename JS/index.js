@@ -1,5 +1,6 @@
 function getMultiValueCookie(name) {
-    const cookieArray = document.cookie.split(', ');
+    const cookieArray = document.cookie.split('; ');
+    console.log(cookieArray);   
     for (let i = 0; i < cookieArray.length; i++) {
         const cookie = cookieArray[i].split('=');
         if (cookie[0] === name) {
