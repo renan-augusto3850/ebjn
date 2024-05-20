@@ -40,9 +40,11 @@ if(cookie && cookie[1] == "Karla") {
                 title.innerHTML = result.title;
                 let emailorname = row.insertCell(1);
                 emailorname.innerHTML = result.emailorname;
-                let startdate = row.insertCell(2);
+                let serie = row.insertCell(2);
+                serie.innerHTML = result.serie;
+                let startdate = row.insertCell(3);
                 startdate.innerHTML = result.startdate;
-                let finish = row.insertCell(3);
+                let finish = row.insertCell(4);
                 finish.innerHTML = `<button onclick="finishConsult('${result.emailorname}')"><i class="fa-solid fa-check"></i></button>`;
             });
     }).catch(error => console.error(error));
