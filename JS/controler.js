@@ -114,6 +114,7 @@ if(cookie && cookie[1] == "Karla") {
     });
     document.getElementById('consult-submit-form').addEventListener('click', () => {
         var emailOrname = document.getElementById('consult-form-emailorname').value;
+        var serie = document.getElementById('consult-form-serie').value;
         var title = document.getElementById('book-option');
         title = title.options[title.selectedIndex].value;
         if(emailOrname && title) {
@@ -122,6 +123,7 @@ if(cookie && cookie[1] == "Karla") {
                     operation: 'book-consult-add',
                     emailOrname,
                     title,
+                    serie,
                     placeholder: smart.placeholdify(title),
                     startDate: new Date().toISOString().split('T')[0]
                 };

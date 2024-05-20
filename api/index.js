@@ -93,7 +93,7 @@ app.post('/book', async(req, res) => {
         res.send({result: "sucessfuly"});
     }
     if(query.operation == "book-consult-add") {
-        await sql`insert into bookconsult (emailorname, placeholder, startdate, title) values(${query.emailOrname}, ${query.placeholder}, ${query.startDate}, ${query.title})`;
+        await sql`insert into bookconsult (emailorname, placeholder, startdate, title, serie) values(${query.emailOrname}, ${query.placeholder}, ${query.startDate}, ${query.title}, ${query.serie})`;
         res.send({result: "sucessfuly"});
     }
     if(query.operation == "book-consult-get") {
