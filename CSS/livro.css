@@ -15,7 +15,14 @@ body{
 }
 #flipbook{
     top: 5%;
-    left: 1%;
+    left: 15%;
+}
+@media (max-resolution: 1dppx) {
+    @media (any-pointer: coarse) {
+        #flipbook{
+            left: 1%;
+        }
+    }
 }
 .hard{
     background-color: gray;
