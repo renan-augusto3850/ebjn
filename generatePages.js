@@ -3,10 +3,10 @@ function sleep(ms) {
 }
 console.log("<div id='flipbook'>");
 async function here() {
-    console.log(`   <div><img class='page' src='/PAGES/liberta-me/${i}.jpg'></div>`);
+    console.log(`   <div><img class='page' src='/PAGES/aceita-me/${i}.jpg'></div>`);
     await sleep(100);
 }
-for(var i = 1; i < 127; i++){
+for(var i = 1; i < 133; i++){
    here().then(() => {
        console.log("</div>")
    })
