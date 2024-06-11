@@ -1,11 +1,11 @@
 POST http://localhost:3000/user
 Content-Type: application/json
 
-{ "operation": "read-update", "id": "7d532d4c-17ac-4ef1-8efe-aaff83a50df4", "pageNumber": 9, "placeholder": "melhor-do-que-nos-filmes" }
+{ "operation": "read-finish", "id": "3d63c413-3f5b-4b7d-b675-cdfc335c9834", "finishDate": "2024-06-11", "medianInDays": 2, "placeholder": "teste" }
 
 ###
 
 POST http://localhost:3000/user
 Content-Type: application/json
 
-{ "operation": "pnts-get", "id": "7d532d4c-17ac-4ef1-8efe-aaff83a50df4", "pnts": -5 }
+{ "operation": "pnts-add", "id": "7d532d4c-17ac-4ef1-8efe-aaff83a50df4", "pnts": 0.1 }

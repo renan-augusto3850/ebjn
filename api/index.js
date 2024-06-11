@@ -7,6 +7,7 @@ import 'dotenv/config';
 import {randomUUID} from "crypto";
 //import ebjnDrive from './drive.js';
 import bodyParser from 'body-parser';
+import pageRange from '../pageRange.js';
 //import cryptoJS from 'crypto-js';
 //import cookieParser from 'cookie-parser';
 //import multer from 'multer';
@@ -32,6 +33,7 @@ const sql = postgres({
     },
 });
 //const auth = ebjn.createAuth();
+const range = new pageRange();
 
 app.get('/', (req, res) => {
     const archive = path.resolve(process.cwd(), 'index.html');
@@ -150,8 +152,8 @@ app.post('/user', async(req, res) => {
     const query = req.body;
     if(query.operation == "read-update") {
         const email = await sql`select email from loginsessions where id = ${query.id}`;
-        await sql`INSERT INTO bookprogress (email, id, page, placeholder)
-        VALUES (${email[0].email}, ${query.id}, ${query.pageNumber}, ${query.placeholder})
+        await sql`INSERT INTO bookprogress (email, id, page, placeholder, date)
+        VALUES (${email[0].email}, ${query.id}, ${query.pageNumber}, ${query.placeholder}, ${query.date})
         ON CONFLICT (email, placeholder) DO UPDATE
         SET page = ${query.pageNumber};
         `;
@@ -162,13 +164,31 @@ app.post('/user', async(req, res) => {
         const page = await sql`select page from bookprogress where placeholder = ${query.placeholder} and email = ${email[0].email}`;
         res.send({result: "sucessfuly", page: page});
     }
+    if(query.operation == "read-finish") {
+        const umDiaEmMilissegundos = 24 * 60 * 60 * 1000;
+        const email = await sql`select email from loginsessions where id = ${query.id}`;
+        const startDate = await sql`select date from bookprogress where email = ${email[0].email} and placeholder = ${query.placeholder}`;
+        const medianReadDate = new Date(startDate[0].date.getTime() + query.medianInDays * umDiaEmMilissegundos).toISOString().slice(0, 10);
+        if(query.finishDate != undefined) {
+            const pnts = range.gerarPontuação(medianReadDate, query.finishDate);
+            await sql`INSERT INTO pntstable (id, pnts)
+            VALUES (${query.id}, ${pnts.toFixed(1)})
+            ON CONFLICT (id) 
+            DO UPDATE 
+            SET pnts = pntstable.pnts + EXCLUDED.pnts`;
+            await sql`delete from bookprogress where id = ${query.id} and placeholder = ${query.placeholder}`;
+            res.send({"result": "sucessfuly", "pnts": pnts});
+        } else{
+            res.statusCode = 500;
+        }
+    }
     if(query.operation == "pnts-get") {
         const pnts = await sql`select pnts from pntstable where id = ${query.id}`;
         res.send(pnts);
     }
     if(query.operation == "pnts-add") {
         await sql`INSERT INTO pntstable (id, pnts)
-        VALUES (${query.id}, ${query.pnts})
+        VALUES (${query.id}, ${parseFloat(query.pnts)})
         ON CONFLICT (id) 
         DO UPDATE 
         SET pnts = pntstable.pnts + EXCLUDED.pnts`;

@@ -9,7 +9,7 @@ export default class pageRange {
     }
 
     #calcularPontos(diferencaEmDias) {
-        if (diferencaEmDias === 0) {
+        if (diferencaEmDias >= 0) {
             return 0.5;
         } else if (Math.abs(diferencaEmDias) <= 5) {
             return 0.4;
@@ -27,13 +27,10 @@ export default class pageRange {
         const novaMediaMilissegundos = this.#calcularNovaMedia(milissegundosMediaLeitura, milissegundosNovaData);
         const novaMediaData = new Date(novaMediaMilissegundos).toISOString().split('T')[0];
 
-        console.log('Nova média de leitura (data):', novaMediaData);
 
         const diferencaEmDias = (milissegundosNovaData - milissegundosMediaLeitura) / (1000 * 60 * 60 * 24);
 
         const pontos = this.#calcularPontos(diferencaEmDias);
-        console.log('Pontos:', pontos.toFixed(1));
+        return pontos;
     }
 }
-const range = new pageRange();
-range.gerarPontuação('2024-05-30', '2024-05-25');

@@ -12,6 +12,7 @@ function getMultiValueCookie(name) {
 const cookie = getMultiValueCookie('username');
 if(cookie) {
     document.querySelector('.fa-user-plus').className = 'fa-solid fa-user';
+    document.querySelector('span').innerHTML = cookie[1];
     const userButton = document.getElementById('u');
     const userDataPanel = document.getElementById('user-data');
     userButton.setAttribute('onclick', '');
