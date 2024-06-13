@@ -340,7 +340,8 @@
                     operation: "read-update",
                     id: id,
                     pageNumber: actualPage,
-                    placeholder: 'restaura-me'
+                    placeholder: 'restaura-me',
+                    date: new Date()
                 };
                 fetch('/user', {
                     method: 'POST',
