@@ -1,24 +1,18 @@
-import Express from 'express';
+import express from 'express';
 import path from 'path';
-import { injectSpeedInsights } from '@vercel/speed-insights';
 import postgres from 'postgres';
 import bcrypt from 'bcrypt';
 import 'dotenv/config';
-import {randomUUID} from "crypto";
-//import ebjnDrive from './drive.js';
-import bodyParser from 'body-parser';
 import pageRange from '../pageRange.js';
-//import cryptoJS from 'crypto-js';
-//import cookieParser from 'cookie-parser';
-//import multer from 'multer';
-//import { google } from 'googleapis';
+import pdfTools from './pdfTools.js';
 
 //const ebjn = new ebjnDrive();
-const app = Express();
+const app = express();
 //const upload = multer();
-app.use(bodyParser.json());
+app.use(express.json());
 //app.use(cookieParser());
-injectSpeedInsights();
+const pdf = new pdfTools();
+pdf.convertToImages('./Get_Started_With_Smallpdf.pdf', 'test');
 
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 const sql = postgres({
@@ -128,7 +122,7 @@ app.get('/sobre', (req, res) => {
 app.post('/usuario', async(req, res) => {
     const usuario = req.body;
     const securePassword = await bcrypt.hash(usuario.password, 10);
-    usuario.id = randomUUID();
+    usuario.id = crypto.randomUUID();
     await sql`insert into users (id, name, email, password) values(${usuario.id}, ${usuario.name}, ${usuario.email}, ${securePassword})`;
     res.send(JSON.stringify({result: 'sucessfuly'}));
     
@@ -141,7 +135,7 @@ app.post('/login', async(req, res) => {
     usuario.name = usuario.name[0].name
     const hashedPasssword = query[0].password;
     if(await bcrypt.compare(usuario.password, hashedPasssword)) {
-        const id = randomUUID();
+        const id = crypto.randomUUID();
         await sql`insert into loginsessions (email, id, name) values(${usuario.email}, ${id}, ${usuario.name})`;
         res.send({"result": true, id: id, name: usuario.name});
     } else{

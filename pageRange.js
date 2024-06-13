@@ -1,4 +1,3 @@
-
 export default class pageRange {
     #dataParaMilissegundos(data) {
         return new Date(data).getTime();
