@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>EBJN</title>
+    <title>EBJN - +12</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/index">
     <link rel="manifest" href="/manifest">
@@ -50,7 +50,7 @@
            <a href="/sobre" class="simple-link">Sobre</a>
         </div>
         <nav>
-            <i class="fa-solid fa-bars" id="open-menu"></i>
+            <button class="voltar" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></button>
             <h1>EBJN</h1>
            <button onclick="window.location.assign('/cadastro')" class="usuario" id="u"><i class="fa-solid fa-user-plus"></i></button>
         </nav>
@@ -58,7 +58,7 @@
             <h2>Ola <span>user</span>!</h2>
             <label id="pnts"><i class="fa-solid fa-circle-half-stroke"></i>0 Pnts.</label>
         </div>
-        <h2>Bem Vindo a EBJN</h2>
+        <h2>+12 Anos.</h2>
         <div class="back-blur" id="es5g52jye">
             <div class="livro-box">
                 <button class="fechar" id="fechar-es5g52jye"><i class="fa-solid fa-close"></i></button>
@@ -92,20 +92,15 @@
                 <h6>Editor(a): Lynn Painter</h6>
                 <button class="primary-button" id="abrir-mgeuvvebd">Ir ></button>
             </div>
-            <div class="container">
-                <h2>Serie: </h2>
-                <img src="/assets/estilhaca-me" alt="Serie de Livros Estilhaça-me">
-                <h6>Editor(a): Taherem Mafi</h6>
-                <button class="primary-button" id="abrir-es5g52jye">Ir ></button>
-            </div>
-        </div>
-        <h2>Selecione por idade:</h2>
-        <div class="idades">
-            <a class="l" href="/IDADES/l">L</a>
-            <a class="dez" href="/IDADES/10">10</a>
-            <a class="doze" href="/IDADES/12">12</a>
-            <a class="quatorze" href="/IDADES/14">14</a>
         </div>
     </body>
 </html>
-<script src="/js/index"></script>
+<script src="/js/sIndex"></script>
+<script>
+    document.getElementById('abrir-mgeuvvebd').addEventListener('click', ()=> {
+        document.getElementById('mgeuvvebd').style.display = 'block';
+    });
+    document.getElementById('fechar-mgeuvvebd').addEventListener('click', ()=> {
+        document.getElementById('mgeuvvebd').style.display = 'none';
+    });
+</script>

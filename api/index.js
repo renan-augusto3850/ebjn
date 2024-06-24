@@ -11,8 +11,6 @@ const app = express();
 //const upload = multer();
 app.use(express.json());
 //app.use(cookieParser());
-const pdf = new pdfTools();
-pdf.convertToImages('./Get_Started_With_Smallpdf.pdf', 'test');
 
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 const sql = postgres({
@@ -31,6 +29,11 @@ const range = new pageRange();
 
 app.get('/', (req, res) => {
     const archive = path.resolve(process.cwd(), 'index.html');
+    res.sendFile(archive);
+});
+app.get('/IDADES/:age', (req, res) => {
+    const age = req.params.age;
+    const archive = path.resolve(process.cwd(), `AGES/${age}.html`);
     res.sendFile(archive);
 });
 app.get('/css/:stylesheet', (req, res) => {
