@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
     const archive = path.resolve(process.cwd(), 'index.html');
     res.sendFile(archive);
 });
+app.get('/termos-de-servico', (req, res) => {
+    const archive = path.resolve(process.cwd(), 'terms.html');
+    res.sendFile(archive);
+});
 app.get('/IDADES/:age', (req, res) => {
     const age = req.params.age;
     const archive = path.resolve(process.cwd(), `AGES/${age}.html`);
