@@ -60,5 +60,16 @@
         </div>
         <h2>+10 Anos.</h2>
         <p>Ainda não tem.</p>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <link rel="stylesheet" href="/css/nprogress">
+        <script src="/js/nprogress"></script>
+        <script>
+            $('body').show();
+            $('.version').text(NProgress.version);
+            NProgress.start();
+        </script>
+        <script>
+            NProgress.done();
+        </script>
     </body>
 </html>

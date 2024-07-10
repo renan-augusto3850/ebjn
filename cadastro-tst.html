@@ -71,6 +71,17 @@
             <button type="submit" id="cadastrar">Cadastrar!</button>
         </div>
         <p>Caso ja tenha cadastrado, <a href="/login" style="background-color: transparent; color: blue; text-decoration: solid 1px blue; margin-left: -20px;">Faça login clicando aqui!</a></p>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <link rel="stylesheet" href="/css/nprogress">
+        <script src="/js/nprogress"></script>
+        <script>
+            $('body').show();
+            $('.version').text(NProgress.version);
+            NProgress.start();
+        </script>
+        <script>
+            NProgress.done();
+        </script>
     </body>
 </html>
 <script src="/js/cadastro"></script>

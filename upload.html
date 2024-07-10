@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <head>
-    <title>E-Biblioteca</title>
+    <title>EBJN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/index">
     <link rel="stylesheet" href="/css/upload">
     <link rel="manifest" href="/manifest">
+    <link rel="icon" href="/icon">
     <meta name="theme-color" content="#1DA6E1"/>
     <meta name="description" content="Biblioteca Digital da Escola Municipal José Neri de Oliveira.">
     <meta name="author" content="Renan Augusto, Rosa Maria, Dafne Matias, Maria Yasmin">
     <script src="https://kit.fontawesome.com/e77c01ed94.js" crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TGJ8RLB5P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-3TGJ8RLB5P');
+    </script>
 </head>
 <html lang="pt-br">
     <body>
@@ -50,19 +60,49 @@
             </div>
         </div>
         <h2>Vamos Fazer upload:</h2>
+        <div id="upload-wait">
+            <img src="/ASSETS/animation.gif" width="200">
+            <p>Fazendo upload ...</p>
+        </div>
         <form method="post" action="/upload" enctype="multipart/form-data">
             <input type="text" name="title" placeholder="Titulo do livro:" required>
             <br>
-            <input type="text" name="author" placeholder="Autora:" required>
+            <input type="text" name="author" placeholder="Autor(a):" required>
             <br>
             <input type="number" name="pages" placeholder="Paginas:" required>
             <br>
+            <select name="age">
+                <option value="L">L</option>
+                <option value="10">+10</option>
+                <option value="12">+12</option>
+                <option value="14">+14</option>
+            </select>
+            <br>
             <input type="file" name="file" accept=".pdf" required>
             <br>
-            <textarea name="aboutAuthor" placeholder="Sobre a autora:" style="resize: none;" required></textarea>
+            <input type="text" name="authorpicture" placeholder="Link para imagem do autor:" required>
             <br>
-            <input type="submit"/>
+            <textarea name="aboutauthor" placeholder="Sobre a autora:" style="resize: none;" required></textarea>
+            <br>
+           <button id="upload">Enviar</button>
         </form>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <link rel="stylesheet" href="/css/nprogress">
+        <script src="/js/nprogress"></script>
+        <script>
+            $('body').show();
+            $('.version').text(NProgress.version);
+            NProgress.start();
+        </script>
+        <script>
+            NProgress.done();
+        </script>
     </body>
 </html>
 <script src="/js/index"></script>
+<script>
+    document.getElementById('upload').addEventListener('click', () => {
+        document.getElementById('upload-wait').style.display = 'block';
+        document.querySelector('form').submit();
+    });
+</script>

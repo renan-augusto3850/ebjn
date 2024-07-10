@@ -6,7 +6,9 @@ const smart = new SmartSDK();
 export default class pdfTools{
     convertToImages(path, title) {
         const sampleTitle = smart.placeholdify(title);
-        fs.mkdirSync(`./temp/PAGES/${sampleTitle}`);
-        exec(`mutool convert -o ./temp/PAGES/${sampleTitle}/${title}.png ${path}`);
+        fs.mkdirSync(`./PAGES/${sampleTitle}`);
+        const command = `mutool convert -o ./PAGES/${sampleTitle}/${sampleTitle}.png ${path}`;
+        console.log(command);
+        exec(command);
     }
 }

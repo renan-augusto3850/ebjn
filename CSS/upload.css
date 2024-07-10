@@ -18,3 +18,13 @@ input[type=file]::file-selector-button {
 input[type=file]::file-selector-button:hover {
     background: #0d45a5;
 }
+#upload-wait{
+    display: none;
+    position: fixed;
+    background-color: white;
+    width: 60%;
+    height: 40%;
+    transform: translate(30%, 30%);
+    border-radius: 15px;
+    border: dotted 3px black;
+}

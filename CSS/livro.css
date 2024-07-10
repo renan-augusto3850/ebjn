@@ -35,13 +35,14 @@ body{
     margin: 16px;
 }
 #flipbook{
+    position: absolute;
     top: 5%;
     left: 15%;
 }
 @media (max-resolution: 1dppx) {
     @media (any-pointer: coarse) {
         #flipbook{
-            left: 1%;
+            left: 0%;
         }
     }
 }

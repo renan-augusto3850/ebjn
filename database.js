@@ -1,4 +1,6 @@
 import postgres from  'postgres';
+import dotenv from 'dotenv';
+dotenv.config();
 
 let NEW_PASSWORD = process.env.NEW_PASSWORD;
 
@@ -12,4 +14,4 @@ const sql = postgres({
     port: 5432,
 });
 
-sql`select * from users`.then(result => console.log(result));
+sql`select * from books`.then(result => console.log(result));

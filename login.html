@@ -35,6 +35,17 @@
             </div>
         </div>
         <p>Caso seja sua primeira vez aqui, <a href="/cadastro" style="background-color: transparent; color: blue; text-decoration: solid 1px blue; margin-left: -20px;">crie sua conta aqui!</a></p>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <link rel="stylesheet" href="/css/nprogress">
+        <script src="/js/nprogress"></script>
+        <script>
+            $('body').show();
+            $('.version').text(NProgress.version);
+            NProgress.start();
+        </script>
+        <script>
+            NProgress.done();
+        </script>
     </body>
 </html>
 <script src="/js/login"></script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+    <title>EBJN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index">
+    <link rel="stylesheet" href="/css/livro">
+    <link rel="manifest" href="/manifest">
+    <link rel="icon" href="/icon">
+    <meta name="theme-color" content="#1DA6E1"/>
+    <meta name="description" content="Biblioteca Digital da Escola Municipal José Neri de Oliveira.">
+    <meta name="author" content="Renan Augusto, Rosa Maria, Dafne Matias, Maria Yasmin">
+    <script src="https://kit.fontawesome.com/e77c01ed94.js" crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TGJ8RLB5P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-3TGJ8RLB5P');
+    </script>
+</head>
+<body>
+  <nav>
+    <button class="voltar" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></button>
+    <h1>EBJN</h1>
+  </nav>
+  <div id="flipbook">
+    <% for(let i = 1; i < query[0].pages; i++) { %>
+      <div>
+        <img class="page" src="/PAGES/<%= placeholder%>/<%= placeholder + i%>.png">
+      </div>
+    <% }%>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <link rel="stylesheet" href="/css/nprogress">
+        <script src="/js/nprogress"></script>
+        <script>
+            $('body').show();
+            $('.version').text(NProgress.version);
+            NProgress.start();
+            var interval = setInterval(() => NProgress.inc(), 1000);
+        </script>
+        <script>
+          $(window).on('load', () => {
+            clearInterval(interval);
+            NProgress.done();
+          });
+        </script>
+</body>
+</html>
+<script src="/js/turn"></script>
+<script src="/js/book"></script>

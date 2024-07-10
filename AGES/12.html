@@ -93,6 +93,17 @@
                 <button class="primary-button" id="abrir-mgeuvvebd">Ir ></button>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <link rel="stylesheet" href="/css/nprogress">
+        <script src="/js/nprogress"></script>
+        <script>
+            $('body').show();
+            $('.version').text(NProgress.version);
+            NProgress.start();
+        </script>
+        <script>
+            NProgress.done();
+        </script>
     </body>
 </html>
 <script src="/js/sIndex"></script>

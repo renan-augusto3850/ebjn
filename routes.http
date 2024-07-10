@@ -9,3 +9,10 @@ POST http://localhost:3000/user
 Content-Type: application/json
 
 { "operation": "pnts-add", "id": "7d532d4c-17ac-4ef1-8efe-aaff83a50df4", "pnts": 0.1 }
+
+###
+
+POST http://localhost:3050/books
+Content-Type: application/json
+
+{ "title": "Estilhaça-me" }
