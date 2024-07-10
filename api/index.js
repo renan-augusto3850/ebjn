@@ -17,32 +17,19 @@ const app = express();
 app.use(express.json());
 //app.use(cookieParser());
 
-let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
-PGPASSWORD = decodeURIComponent(PGPASSWORD);
+/*const { NEW_PASSWORD } = process.env;
 
 const sql = postgres({
-  host: PGHOST,
-  database: PGDATABASE,
-  username: PGUSER,
-  password: PGPASSWORD,
-  port: 5432,
-  ssl: 'require',
-  connection: {
-    options: `project=${ENDPOINT_ID}`,
-  },
-});
+    host: 'localhost',
+    database: 'ebjn',
+    username: 'postgres',
+    password: NEW_PASSWORD,
+    port: 5432,
+});*/
 const range = new pageRange();
 
 const smart = new SmartSDK();
 let name;
-const storage = multer.diskStorage({
-    destination: "./temp",
-    filename: (req, file, cb) => {
-        name = smart.placeholdify(file.originalname);
-        cb(null, smart.placeholdify(file.originalname))
-    }
-});
-const upload = multer({storage});
 
 const pdf = new pdfTools();
 
@@ -216,31 +203,6 @@ app.get('/espaco-escola/:page', (req, res) => {
     const page = req.params.page;
     const archive = path.resolve(process.cwd(), `EDUCATOR-SPACE/${page}.html`);
     res.sendFile(archive);
-});
-app.post('/upload', upload.single('file'), async(req, res) => {
-    console.log(req.body);
-    pdf.convertToImages(`temp/${name}`, req.body.title);
-    const sampleTitle = smart.placeholdify(req.body.title);
-    console.log(sampleTitle);
-    const totalPages = req.body.pages;
-    function sleep(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
-    
-    function calculateReadingTimeInDays(pages, readingSpeed) {
-        // Assuming readingSpeed is in pages per minute
-        const readingTimeMinutes = pages / readingSpeed;
-        const totalMinutesPerDay = 60; // Adjust based on your daily reading time
-        
-        const totalDays = Math.ceil(readingTimeMinutes / totalMinutesPerDay);
-        return totalDays;
-    }
-    
-    
-    const estimatedDays = calculateReadingTimeInDays(req.body.pages, 0.33);
-    await sql`insert into books (title, author, placeholder, aboutauthor, authorpicture, id, medianindays, pages, age) values (${req.body.title}, ${req.body.author}, ${sampleTitle}, ${req.body.aboutauthor}, ${req.body.authorpicture},  ${randomUUID()}, ${estimatedDays}, ${totalPages}, ${req.body.age})`;
-    
-    res.redirect(`/LIVRO/${sampleTitle}`);
 });
 app.get('/LIVRO/:placeholder', async(req, res) => {
     const placeholder = req.params.placeholder;
