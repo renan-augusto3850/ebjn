@@ -17,14 +17,19 @@ const app = express();
 app.use(express.json());
 //app.use(cookieParser());
 
-const { NEW_PASSWORD } = process.env;
+let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+PGPASSWORD = decodeURIComponent(PGPASSWORD);
 
 const sql = postgres({
-    host: 'localhost',
-    database: 'ebjn',
-    username: 'postgres',
-    password: NEW_PASSWORD,
-    port: 5432,
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: 'require',
+  connection: {
+    options: `project=${ENDPOINT_ID}`,
+  },
 });
 const range = new pageRange();
 
