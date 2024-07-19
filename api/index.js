@@ -17,15 +17,21 @@ const app = express();
 app.use(express.json());
 //app.use(cookieParser());
 
-/*const { NEW_PASSWORD } = process.env;
+let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+PGPASSWORD = decodeURIComponent(PGPASSWORD);
 
 const sql = postgres({
-    host: 'localhost',
-    database: 'ebjn',
-    username: 'postgres',
-    password: NEW_PASSWORD,
-    port: 5432,
-});*/
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: 'require',
+  connection: {
+    options: `project=${ENDPOINT_ID}`,
+  },
+});
+
 const range = new pageRange();
 
 const smart = new SmartSDK();
@@ -45,119 +51,15 @@ app.use((req, res, next) => {
 });
 
 app.get('/', async(req, res) => {
-    const query = [
-        {
-          title: 'Alice no país das maravilhas',
-          placeholder: 'alice-no-pais-das-maravilhas',
-          author: 'Lewis Carroll',
-          aboutauthor: 'Charles Lutwidge Dodgson, mais conhecido pelo seu pseudônimo Lewis Carroll (Daresbury, 27 de janeiro de 1832 – Guildford, 14 de janeiro de 1898), foi um romancista, contista, fabulista, poeta, desenhista, fotógrafo, matemático e reverendo anglicano britânico. Lecionou matemática no Christ College, em Oxford. É autor do clássico livro Alice no País das Maravilhas, além de outros.',
-          id: '4f4a54ce-b8ce-4054-bdcd-0e3a728b7198',
-          authorpicture: 'https://th.bing.com/th/id/OIP.rNT-RoXZRksr9ZEm511q_gHaLR?rs=1&pid=ImgDetMain',
-          medianindays: 9,
-          pages: 171,
-          age: 'L'
-        },
-        {
-          title: 'Estilhaça-me',
-          placeholder: 'estilhaca-me',
-          author: 'Taherem Mafi',
-          aboutauthor: 'Tahereh Mafi é uma autora best-seller do New York Times e USA Today. Ela é conhecida por sua série de livros “Estilhaça-me”, que foi publicada em 22 países e vendeu mais de 150 mil exemplares apenas no Brasil.',
-          id: '5d56f5f3-6269-40b7-b2a3-ae906abf3600',
-          authorpicture: 'https://th.bing.com/th/id/OIP.isHosJN1E20j8KITG44b-QHaLH?rs=1&pid=ImgDetMain',
-          medianindays: 15,
-          pages: 292,
-          age: '14'
-        },
-        {
-          title: 'Liberta-me',
-          placeholder: 'liberta-me',
-          author: 'Taherem Mafi',
-          aboutauthor: 'Tahereh Mafi é uma autora best-seller do New York Times e USA Today. Ela é conhecida por sua série de livros “Estilhaça-me”, que foi publicada em 22 países e vendeu mais de 150 mil exemplares apenas no Brasil.',
-          id: '4bbb71b7-227d-448b-a9aa-f23471fee107',
-          authorpicture: 'https://th.bing.com/th/id/OIP.isHosJN1E20j8KITG44b-QHaLH?rs=1&pid=ImgDetMain',
-          medianindays: 29,
-          pages: 570,
-          age: '14'
-        },
-        {
-          title: 'Incedeia-me',
-          placeholder: 'incedeia-me',
-          author: 'Taherem Mafi',
-          aboutauthor: 'Tahereh Mafi é uma autora best-seller do New York Times e USA Today. Ela é conhecida por sua série de livros “Estilhaça-me”, que foi publicada em 22 países e vendeu mais de 150 mil exemplares apenas no Brasil.',
-          id: '6fdf0952-258b-413d-b272-e4b419a57972',
-          authorpicture: 'https://th.bing.com/th/id/OIP.isHosJN1E20j8KITG44b-QHaLH?rs=1&pid=ImgDetMain',
-          medianindays: 23,
-          pages: 450,
-          age: '14'
-        },
-        {
-          title: 'Restaura-me',
-          placeholder: 'restaura-me',
-          author: 'Taherem Mafi',
-          aboutauthor: 'Tahereh Mafi é uma autora best-seller do New York Times e USA Today. Ela é conhecida por sua série de livros “Estilhaça-me”, que foi publicada em 22 países e vendeu mais de 150 mil exemplares apenas no Brasil.',
-          id: '6e141361-0075-4847-8800-09837b62ed8b',
-          authorpicture: 'https://th.bing.com/th/id/OIP.isHosJN1E20j8KITG44b-QHaLH?rs=1&pid=ImgDetMain',
-          medianindays: 14,
-          pages: 276,
-          age: '14'
-        },
-        {
-          title: 'Desafia-me',
-          placeholder: 'desafia-me',
-          author: 'Taherem Mafi',
-          aboutauthor: 'Tahereh Mafi é uma autora best-seller do New York Times e USA Today. Ela é conhecida por sua série de livros “Estilhaça-me”, que foi publicada em 22 países e vendeu mais de 150 mil exemplares apenas no Brasil.',
-          id: '32297ae6-a623-450c-9ebd-12bdf5417241',
-          authorpicture: 'https://th.bing.com/th/id/OIP.isHosJN1E20j8KITG44b-QHaLH?rs=1&pid=ImgDetMain',
-          medianindays: 12,
-          pages: 234,
-          age: '14'
-        },
-        {
-          title: 'Imagina-me',
-          placeholder: 'imagina-me',
-          author: 'Taherem Mafi',
-          aboutauthor: 'Tahereh Mafi é uma autora best-seller do New York Times e USA Today. Ela é conhecida por sua série de livros “Estilhaça-me”, que foi publicada em 22 países e vendeu mais de 150 mil exemplares apenas no Brasil.',
-          id: 'd3626e44-8240-4eb2-b9eb-46094e7adf7d',
-          authorpicture: 'https://th.bing.com/th/id/OIP.isHosJN1E20j8KITG44b-QHaLH?rs=1&pid=ImgDetMain',
-          medianindays: 10,
-          pages: 196,
-          age: '14'
-        },
-        {
-          title: 'Decifra-me',
-          placeholder: 'decifra-me',
-          author: 'Taherem Mafi',
-          aboutauthor: 'Tahereh Mafi é uma autora best-seller do New York Times e USA Today. Ela é conhecida por sua série de livros “Estilhaça-me”, que foi publicada em 22 países e vendeu mais de 150 mil exemplares apenas no Brasil.',
-          id: '06aa0704-99e1-4e8a-869d-726ff5b03bb6',
-          authorpicture: 'https://th.bing.com/th/id/OIP.isHosJN1E20j8KITG44b-QHaLH?rs=1&pid=ImgDetMain',
-          medianindays: 7,
-          pages: 131,
-          age: '14'
-        },
-        {
-          title: 'Unifica-me',
-          placeholder: 'unifica-me',
-          author: 'Taherem Mafi',
-          aboutauthor: 'Tahereh Mafi é uma autora best-seller do New York Times e USA Today. Ela é conhecida por sua série de livros “Estilhaça-me”, que foi publicada em 22 países e vendeu mais de 150 mil exemplares apenas no Brasil.',
-          id: '8c8243c8-9698-4adf-a884-8774a54ce15d',
-          authorpicture: 'https://th.bing.com/th/id/OIP.isHosJN1E20j8KITG44b-QHaLH?rs=1&pid=ImgDetMain',
-          medianindays: 8,
-          pages: 157,
-          age: '14'
-        },
-        {
-          title: 'Aceita-me',
-          placeholder: 'aceita-me',
-          author: 'Taherem Mafi',
-          aboutauthor: 'Tahereh Mafi é uma autora best-seller do New York Times e USA Today. Ela é conhecida por sua série de livros “Estilhaça-me”, que foi publicada em 22 países e vendeu mais de 150 mil exemplares apenas no Brasil.',
-          id: '90cc3ed9-29dc-4ee9-8ce0-d923417bdc82',
-          authorpicture: 'https://th.bing.com/th/id/OIP.isHosJN1E20j8KITG44b-QHaLH?rs=1&pid=ImgDetMain',
-          medianindays: 7,
-          pages: 133,
-          age: '14'
+    fetch('https://weekly-grown-bug.ngrok-free.app/books', {
+        headers: {
+            "ngrok-skip-browser-warning": "84"
         }
-      ];
-    res.render('index', { query });
+    })
+    .then(data => data.json())
+        .then(query => {
+            res.render('index', { query });
+    });
 });
 app.get('/termos-de-servico', (req, res) => {
     const archive = path.resolve(process.cwd(), 'terms.html');
