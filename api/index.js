@@ -42,7 +42,7 @@ const pdf = new pdfTools();
 app.set('view engine', 'ejs');
 app.set(path.resolve(process.cwd(), 'views'));
 
-// Middleware to stop NProgress after route completes
+// Middeware to stop NProgress after route completes
 app.use((req, res, next) => {
   res.on("finish", () => {
     NProgress.done();
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 app.get('/', async(req, res) => {
     fetch('https://weekly-grown-bug.ngrok-free.app/books', {
         headers: {
-            "ngrok-skip-browser-warning": "84"
+            "ngrok-skip-browser-warning": "845"
         }
     })
     .then(data => data.json())
