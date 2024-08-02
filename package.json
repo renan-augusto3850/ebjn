@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node api/index.js"
+    "dev": "node api/index.js"
   },
   "keywords": [
     "biblioteca",

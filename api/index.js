@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 //app.use(cookieParser());
 
-let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+/*et { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 PGPASSWORD = decodeURIComponent(PGPASSWORD);
 
 const sql = postgres({
@@ -25,12 +25,8 @@ const sql = postgres({
   database: PGDATABASE,
   username: PGUSER,
   password: PGPASSWORD,
-  port: 5432,
-  ssl: 'require',
-  connection: {
-    options: `project=${ENDPOINT_ID}`,
-  },
-});
+  port: 80,
+});*/
 
 const range = new pageRange();
 
@@ -42,18 +38,11 @@ const pdf = new pdfTools();
 app.set('view engine', 'ejs');
 app.set(path.resolve(process.cwd(), 'views'));
 
-// Middeware to stop NProgress after route completes
-app.use((req, res, next) => {
-  res.on("finish", () => {
-    NProgress.done();
-  });
-  next();
-});
-
 app.get('/', async(req, res) => {
     fetch('https://weekly-grown-bug.ngrok-free.app/books', {
+        method: "POST",
         headers: {
-            "ngrok-skip-browser-warning": "845"
+            "ngrok-skip-browser-warning": "8455"
         }
     })
     .then(data => data.json())
@@ -108,8 +97,17 @@ app.get('/espaco-escola/:page', (req, res) => {
 });
 app.get('/LIVRO/:placeholder', async(req, res) => {
     const placeholder = req.params.placeholder;
-    const query = await sql`select * from books where placeholder = ${placeholder}`;
-    res.render('book', { placeholder, query });
+    console.log("Livro: ", placeholder);
+    fetch('https://weekly-grown-bug.ngrok-free.app/book-info', {
+        method: "POST",
+        headers: {
+            "ngrok-skip-browser-warning": "845"
+        }
+    })
+    .then(data => data.json())
+        .then(query => {
+            res.render('book', { placeholder, query });
+    });
 });
 app.post('/book-list', async(req, res) => {
     if(req.body.title) {

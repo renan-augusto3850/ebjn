@@ -4,7 +4,6 @@ import multer from 'multer';
 import pdfTools from './api/pdfTools.js';
 import fs from 'fs';
 import SmartSDK from './smartSDK.js';
-import pdfPageCounter from 'pdf-page-counter';
 import postgres from 'postgres';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
@@ -118,6 +117,13 @@ app.get('/LIVRO/:placeholder', async(req, res) => {
 app.post('/books', async(req, res) => {
     if(req.body.title) {
         res.send(await sql`select * from books where title = ${req.body.title}`);
+    }else {
+        res.send(await sql`select * from books`); 
+    }
+});
+app.post('/book-info', async(req, res) => {
+    if(req.body.placeholder) {
+        res.send(await sql`select * from books where placeholder = ${req.body.placeholder}`);
     }else {
         res.send(await sql`select * from books`); 
     }
