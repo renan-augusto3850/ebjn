@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 //app.use(cookieParser());
 
-/*et { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+/*let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 PGPASSWORD = decodeURIComponent(PGPASSWORD);
 
 const sql = postgres({
@@ -39,11 +39,8 @@ app.set('view engine', 'ejs');
 app.set(path.resolve(process.cwd(), 'views'));
 
 app.get('/', async(req, res) => {
-    fetch('https://weekly-grown-bug.ngrok-free.app/books', {
-        method: "POST",
-        headers: {
-            "ngrok-skip-browser-warning": "8455"
-        }
+    fetch('https://ebjn.serveo.net/books', {
+        method: "POST"
     })
     .then(data => data.json())
         .then(query => {
@@ -52,11 +49,6 @@ app.get('/', async(req, res) => {
 });
 app.get('/termos-de-servico', (req, res) => {
     const archive = path.resolve(process.cwd(), 'terms.html');
-    res.sendFile(archive);
-});
-app.get('/IDADES/:age', (req, res) => {
-    const age = req.params.age;
-    const archive = path.resolve(process.cwd(), `AGES/${age}.html`);
     res.sendFile(archive);
 });
 app.get('/css/:stylesheet', (req, res) => {
@@ -98,11 +90,8 @@ app.get('/espaco-escola/:page', (req, res) => {
 app.get('/LIVRO/:placeholder', async(req, res) => {
     const placeholder = req.params.placeholder;
     console.log("Livro: ", placeholder);
-    fetch('https://weekly-grown-bug.ngrok-free.app/book-info', {
-        method: "POST",
-        headers: {
-            "ngrok-skip-browser-warning": "845"
-        }
+    fetch('https://ebjn.serveo.net/book-info', {
+        method: "POST"
     })
     .then(data => data.json())
         .then(query => {
@@ -147,6 +136,17 @@ app.get('/SERIE/:nome_da_serie', (req, res) => {
     const serie = req.params.nome_da_serie;
     const archive = path.resolve(process.cwd(), `SERIE/${serie}.html`);
     res.sendFile(archive);
+});
+app.get('/IDADE/:idade', (req, res) => {
+    const idade = req.params.idade;
+    fetch('https://ebjn.serveo.net/book-info', {
+        method: "POST"
+    })
+    .then(data => data.json())
+        .then(query => {
+            const moderatedBooks = query.filter(livro => livro.age === idade.toUpperCase());
+            res.render(idade, { moderatedBooks });
+    });
 });
 app.get('/assets/:image', (req, res) => {
     const image = req.params.image;

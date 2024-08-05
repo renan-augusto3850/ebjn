@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <head>
-    <title>EBJN</title>
+    <title>EBJN - +12</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/index">
-    <link rel="stylesheet" href="/css/nprogress">
     <link rel="manifest" href="/manifest">
     <link rel="icon" href="/icon">
     <meta name="theme-color" content="#1DA6E1"/>
@@ -49,11 +48,9 @@
            <a href="https://jornaljoseneri.blogspot.com" target="_blank" class="simple-link">JJN</a>
            <br>
            <a href="/sobre" class="simple-link">Sobre</a>
-           <br>
-           <a href="/termos-de-servico" class="simple-link">Termos de uso</a>
         </div>
         <nav>
-            <i class="fa-solid fa-bars" id="open-menu"></i>
+            <button class="voltar" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></button>
             <h1>EBJN</h1>
            <button onclick="window.location.assign('/cadastro')" class="usuario" id="u"><i class="fa-solid fa-user-plus"></i></button>
         </nav>
@@ -61,22 +58,15 @@
             <h2>Ola <span>user</span>!</h2>
             <label id="pnts"><i class="fa-solid fa-circle-half-stroke"></i>0 Pnts.</label>
         </div>
-        <h2>Bem Vindo a EBJN</h2>
+        <h2>+12 Anos.</h2>
         <div class="livros">
-            <% for(let i = 0; i < query.length; i++) {%>
+            <%for(let i = 0; i < moderatedBooks.length; i++) {%> 
                 <div class="container">
-                    <img src="https://ebjn.serveo.net/PAGES/<%=query[i].placeholder%>/<%=query[i].placeholder + 1%>.png" alt="<%=query[i].title%>">
-                    <h6>Autor(a): <%= query[i].author%></h6>
-                    <button class="primary-button" onclick="window.location.assign('/LIVRO/<%= query[i].placeholder%>')">Ler ></button>
+                    <img src="https://ebjn.serveo.net/PAGES/<%=moderatedBooks[i].placeholder%>/<%=moderatedBooks[i].placeholder%>1.png" alt="Livro <%=moderatedBooks[i].title%>">
+                    <h6>Editor(a): <%=moderatedBooks[i].author%></h6>
+                    <button onclick="window.location.assign('/LIVRO/<%=moderatedBooks[i].placeholder%>')" class="primary-button">Ler ></button>
                 </div>
             <%}%>
-        </div>
-        <h2>Selecione por idade:</h2>
-        <div class="idades">
-            <a class="l" href="/IDADE/l">L</a>
-            <a class="dez" href="/IDADE/10">10</a>
-            <a class="doze" href="/IDADE/12">12</a>
-            <a class="quatorze" href="/IDADE/14">14</a>
         </div>
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <link rel="stylesheet" href="/css/nprogress">
@@ -85,14 +75,18 @@
             $('body').show();
             $('.version').text(NProgress.version);
             NProgress.start();
-            var interval = setInterval(() => NProgress.inc(), 1000);
         </script>
         <script>
-          $(window).on('load', () => {
-            clearInterval(interval);
             NProgress.done();
-          });
         </script>
     </body>
 </html>
-<script src="/js/index"></script>
+<script src="/js/sIndex"></script>
+<script>
+    document.getElementById('abrir-mgeuvvebd').addEventListener('click', ()=> {
+        document.getElementById('mgeuvvebd').style.display = 'block';
+    });
+    document.getElementById('fechar-mgeuvvebd').addEventListener('click', ()=> {
+        document.getElementById('mgeuvvebd').style.display = 'none';
+    });
+</script>
