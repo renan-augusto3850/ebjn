@@ -36,8 +36,8 @@ body{
 }
 #flipbook{
     position: absolute;
-    top: 5%;
-    left: 15%;
+    top: 9px;
+    left: 0px;
 }
 @media (max-resolution: 1dppx) {
     @media (any-pointer: coarse) {

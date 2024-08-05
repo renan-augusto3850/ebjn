@@ -65,7 +65,11 @@
         <div class="livros">
             <% for(let i = 0; i < query.length; i++) {%>
                 <div class="container">
+<<<<<<< HEAD
                     <img src="https://ebjn.serveo.net/PAGES/<%=query[i].placeholder%>/<%=query[i].placeholder + 1%>.png" alt="<%=query[i].title%>">
+=======
+                    <img src="https://21f6b38cebb40e2411c5081b4737c849.serveo.net/PAGES/<%=query[i].placeholder%>/<%=query[i].placeholder + 1%>.png" alt="<%=query[i].title%>">
+>>>>>>> ab2ef5c5a243ae8b13b3c86fa59ad60127e8775f
                     <h6>Autor(a): <%= query[i].author%></h6>
                     <button class="primary-button" onclick="window.location.assign('/LIVRO/<%= query[i].placeholder%>')">Ler ></button>
                 </div>

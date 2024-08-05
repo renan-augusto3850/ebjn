@@ -5,8 +5,8 @@ let check = false;
 };
 if(window.mobileCheck()) {
     $("#flipbook").turn({
-	    width: 400,
-	    height: 700,
+	    width: 415,
+	    height: 900,
 	    autoCenter: true,
         display: 'single'
     });
