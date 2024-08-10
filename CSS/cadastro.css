@@ -1,3 +1,6 @@
+body{
+    overflow: hidden;
+}
 nav > .voltar{
     position: absolute;
     left: 16px;
@@ -11,10 +14,18 @@ nav > .voltar{
     border: solid 2px black;
     border-radius: 15px;
     background-color: white;
-    width: 60%;
-    margin: 20% auto;
+    width: 500px;
     height: 200px;
-    padding: 5px;
+    padding: 16px;
+    margin: 5% auto;
+    box-shadow: -10px 10px 44px 0px rgba(0,0,0,0.74);
+    -webkit-box-shadow: -10px 10px 44px 0px rgba(0,0,0,0.74);
+    -moz-box-shadow: -10px 10px 44px 0px rgba(0,0,0,0.74);
+}
+.cadastro-box > input::placeholder{
+    color: black;
+    font-size: 12px;
+    font-family: 'Roboto';
 }
 .tipos-usuarios{
     width: 50%;
@@ -42,12 +53,12 @@ input:focus{
     margin-top: 30px;
 }
 #cadastrar{
-    position: relative;
-    margin-top: 20%;
+    margin-top: 36px;
     background-color: blue;
     border: transparent;
     color: white;
     font-family: 'Roboto';
+    font-weight: bolder;
     width: 66px;
     height: 36px;
     border-radius: 20px;

@@ -11,11 +11,13 @@ function setCookie(name, value, daysToExpire, isHttpOnly) {
         document.cookie = cookieValue;
     }
 }
+let type = 'leitores';
 document.getElementById('cadastrar').addEventListener('click', () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('senha').value;
     const name = document.getElementById('name').value;
-    const data = {email: email, password: password, name: name};
+    const serie = document.getElementById('serie').value;
+    const data = {email, password, name, serie, type};
     console.log(data);
     fetch('/usuario', {
         method: 'POST',
@@ -47,4 +49,15 @@ document.getElementById('cadastrar').addEventListener('click', () => {
                 }).catch(error => console.error(error));
             }
     }).catch(error => console.error(error));
+});
+const divTipos = document.getElementById('type-users');
+divTipos.addEventListener('click', (e) => {
+    if(e.target.className === 'box') {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+        type = e.target.id;
+        console.log(type);
+    }
 });

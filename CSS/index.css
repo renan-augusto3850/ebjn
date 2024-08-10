@@ -17,7 +17,13 @@ body{
     background-color: transparent; 
     color: blue; 
     text-decoration: solid 1px blue; 
-    margin-left: -20px;
+    margin: 16px auto;
+}
+nav:focus-within ~ #user-data{
+    display: block;
+}
+#user-data:hover{
+    display: block;
 }
 .back-blur{
     display: none;

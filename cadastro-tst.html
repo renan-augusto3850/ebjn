@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>E-Biblioteca</title>
+    <title>EBJN - Cadastro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/index">
     <link rel="stylesheet" href="/css/cadastro">
@@ -12,24 +12,22 @@
     <body>
         <nav>
             <button class="voltar" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></button>
-            <h2>E-Biblioteca</h2>
+            <h2>EBJN</h2>
         </nav>
         <h2>Cadastre-se e não perca daquela pagina ou seu livro favorito!</h2>
-        <div class="tipos-usuarios">
-            <div class="box">
+        <p>Escolha uma modalidade:</p>
+        <div class="tipos-usuarios" id="type-users">
+            <div class="box" id="leitores">
                 <i class="fa-solid fa-user" style="font-size: 40px;"></i>
                 <h3>Leitores.</h3>
                 <div style="display: flex; padding: 5px; ">
                     <i class="fa-solid fa-check" style="margin: auto 6px;"></i><p>Pode ler.</p>
                 </div>
                 <div style="display: flex; padding: 5px; ">
-                    <i class="fa-solid fa-check" style="margin: auto 6px;"></i><p>Pode escrever redações.</p>
-                </div>
-                <div style="display: flex; padding: 5px; ">
                     <i class="fa-solid fa-check" style="margin: auto 6px;"></i><p>Pode Participar do placar mensal.</p>
                 </div>
             </div>
-            <div class="box">
+            <div class="box" id="contribuidores">
                 <svg width="30" height="30" viewBox="0 0 102 99" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_1_75" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="102" height="99">
                     <rect width="102" height="99" fill="#D9D9D9"/>
@@ -42,16 +40,10 @@
                 <h3>Contribuidores.</h3>
 
                 <div style="display: flex; padding: 5px; ">
-                    <i class="fa-solid fa-check" style="margin: auto 6px;"></i><p>Ler.</p>
-                </div>
-                <div style="display: flex; padding: 5px; ">
-                    <i class="fa-solid fa-check" style="margin: auto 6px;"></i><p>Escrever redações.</p>
+                    <i class="fa-solid fa-check" style="margin: auto 6px;"></i><p>Pode ler.</p>
                 </div>
                 <div style="display: flex; padding: 5px; ">
                     <i class="fa-solid fa-check" style="margin: auto 6px;"></i><p>Participar do placar mensal.</p>
-                </div>
-                <div style="display: flex; padding: 5px; ">
-                    <i class="fa-solid fa-check" style="margin: auto 6px;"></i><p>Login com o Google.</p>
                 </div>
                 <div style="display: flex; padding: 5px; ">
                     <i class="fa-solid fa-check" style="margin: auto 6px;"></i><p>Brasão exclusivo.</p>
@@ -61,16 +53,24 @@
                 </div>
             </div>
         </div>
-        <div class="cadastro-box">
+        <div class="cadastro-box" style="margin: 100% auto 200px auto;">
             <input id="name" placeholder="Seu nome:">
             <br>
             <input id="email" type="email" placeholder="Seu e-mail:">
             <br>
             <input id="senha" type="password" placeholder="Senha:">
             <br>
-            <button type="submit" id="cadastrar">Cadastrar!</button>
+            <select id="serie" aria-placeholder="Serie:">
+                <option value="invalid">Serie:</option>
+                <option value="6">6° Ano.</option>
+                <option value="7">7° Ano.</option>
+                <option value="8">8° Ano.</option>
+                <option value="9">9° Ano.</option>
+            </select>
+            <br>
+            <button id="cadastrar">Cadastrar!</button>
         </div>
-        <p>Caso ja tenha cadastrado, <a href="/login" style="background-color: transparent; color: blue; text-decoration: solid 1px blue; margin-left: -20px;">Faça login clicando aqui!</a></p>
+        <p>Caso ja esteja cadastrado, <a href="/login" style="background-color: transparent; color: blue; text-decoration: solid 1px blue; margin-left: -20px;">Faça login clicando aqui!</a></p>
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <link rel="stylesheet" href="/css/nprogress">
         <script src="/js/nprogress"></script>

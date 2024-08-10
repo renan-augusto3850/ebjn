@@ -29,9 +29,18 @@ if(cookie) {
                 document.getElementById('pnts').innerHTML = `<i class="fa-solid fa-circle-half-stroke"></i>${result[0].pnts} Pnts.`;
             }
     }).catch(error => console.error(error));
-    userButton.addEventListener('click', () => {
-        userDataPanel.style.display = 'block';
-    });
+    fetch('/user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({operation: "is-contribuitor", id: cookie[0]})
+    }).then(response => response.json())
+        .then(result => {
+           if(result.result) {
+            document.getElementById('user-data').innerHTML += '<br> <a href="https://ebjn.serveo.net" target="_blank" class="simple-link">Cadastrar livros.</a>';
+           }
+    }).catch(error => console.error(error));
 
 }
 document.getElementById('open-menu').addEventListener('click', () => {
@@ -41,16 +50,4 @@ document.getElementById('open-menu').addEventListener('click', () => {
 document.getElementById('close-menu').addEventListener('click', () => {
     document.body.style.overflowY = 'auto';
     document.getElementById('menu').style.left = '-100%';
-});
-document.getElementById('abrir-es5g52jye').addEventListener('click', ()=> {
-    document.getElementById('es5g52jye').style.display = 'block';
-});
-document.getElementById('fechar-es5g52jye').addEventListener('click', ()=> {
-    document.getElementById('es5g52jye').style.display = 'none';
-});
-document.getElementById('abrir-mgeuvvebd').addEventListener('click', ()=> {
-    document.getElementById('mgeuvvebd').style.display = 'block';
-});
-document.getElementById('fechar-mgeuvvebd').addEventListener('click', ()=> {
-    document.getElementById('mgeuvvebd').style.display = 'none';
 });

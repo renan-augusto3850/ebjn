@@ -10,6 +10,7 @@ import SmartSDK from '../smartSDK.js';
 import fs from 'fs';
 import { randomUUID } from 'crypto';
 import NProgress from 'nprogress';
+import Users from './users.js';
 
 //const ebjn = new ebjnDrive();
 const app = express();
@@ -17,7 +18,7 @@ const app = express();
 app.use(express.json());
 //app.use(cookieParser());
 
-/*let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 PGPASSWORD = decodeURIComponent(PGPASSWORD);
 
 const sql = postgres({
@@ -25,13 +26,19 @@ const sql = postgres({
   database: PGDATABASE,
   username: PGUSER,
   password: PGPASSWORD,
-  port: 80,
-});*/
+  port: 5432,
+  ssl: 'require',
+  connection: {
+    options: `project=${ENDPOINT_ID}`,
+  },
+});
+
 
 const range = new pageRange();
 
 const smart = new SmartSDK();
 let name;
+const users = new Users();
 
 const pdf = new pdfTools();
 
@@ -89,12 +96,12 @@ app.get('/espaco-escola/:page', (req, res) => {
 });
 app.get('/LIVRO/:placeholder', async(req, res) => {
     const placeholder = req.params.placeholder;
-    console.log("Livro: ", placeholder);
     fetch('https://ebjn.serveo.net/book-info', {
         method: "POST"
     })
     .then(data => data.json())
         .then(query => {
+            query = query.filter(livro => livro.placeholder === placeholder);
             res.render('book', { placeholder, query });
     });
 });
@@ -154,7 +161,7 @@ app.get('/assets/:image', (req, res) => {
     res.sendFile(archive);
 });
 app.get('/cadastro', (req, res) => {
-    const archive = path.resolve(process.cwd(), 'cadastro.html');
+    const archive = path.resolve(process.cwd(), 'cadastro-tst.html');
     res.sendFile(archive);
 });
 app.get('/upload', (req, res) => {
@@ -169,7 +176,10 @@ app.post('/usuario', async(req, res) => {
     const usuario = req.body;
     const securePassword = await bcrypt.hash(usuario.password, 10);
     usuario.id = crypto.randomUUID();
-    await sql`insert into users (id, name, email, password) values(${usuario.id}, ${usuario.name}, ${usuario.email}, ${securePassword})`;
+    await sql`insert into users (id, name, email, password, serie) values(${usuario.id}, ${usuario.name}, ${usuario.email}, ${securePassword}, ${usuario.serie})`;
+    if(usuario.type === 'contribuidores') {
+        await sql`insert into specialaccounts (email, id, type) values (${usuario.email}, ${usuario.id}, ${usuario.type})`;
+    }
     res.send(JSON.stringify({result: 'sucessfuly'}));
     
 });
@@ -233,6 +243,11 @@ app.post('/user', async(req, res) => {
         DO UPDATE 
         SET pnts = pntstable.pnts + EXCLUDED.pnts`;
         res.send({result: "sucessfuly"});
+    }
+    if(query.operation == "is-contribuitor") {
+        req.body.email = await users.getEmailBySessionId(req.body, sql);
+        const result = await users.isContribuitor(req.body, sql);
+        res.send({ result })
     }
 });
 app.get('/login', (req, res) => {
