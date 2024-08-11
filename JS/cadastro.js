@@ -61,3 +61,15 @@ divTipos.addEventListener('click', (e) => {
         console.log(type);
     }
 });
+const voltar = document.getElementById('voltar');
+voltar.addEventListener('click', () => {
+    voltar.animate([
+        { left: '16px', offset: 0.25 },
+        { left: '25px', offset: 0.50 },
+        { left: '6px', offset: 0.75 },
+        { left: '16px', offset: 1.0 }
+    ], {
+        duration: 300,
+    });
+    setTimeout(() => history.back(), 300);
+});

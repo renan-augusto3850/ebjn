@@ -9,6 +9,7 @@ nav > .voltar{
     background-color: transparent;
     border: transparent;
     color: white;
+    cursor: pointer;
 }
 .cadastro-box{
     border: solid 2px black;
@@ -31,6 +32,11 @@ nav > .voltar{
     width: 50%;
     display: flex;
     margin: auto;
+}
+#leitores:hover, #contribuidores:hover{
+    box-shadow: -17px 11px 39px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: -17px 11px 39px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -17px 11px 39px 0px rgba(0,0,0,0.75);
 }
 .box{
     background-color: white;

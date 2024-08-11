@@ -9,20 +9,15 @@ function getMultiValueCookie(name) {
     return null;
 }
 const cookie = getMultiValueCookie('username');
-if(cookie) {
-    document.querySelector('.fa-user-plus').className = 'fa-solid fa-user';
-    const userButton = document.getElementById('u');
-    userButton.setAttribute('onclick', '');
-    userButton.addEventListener('click', () => {
-        console.log("teste");
+const voltar = document.getElementById('voltar');
+voltar.addEventListener('click', () => {
+    voltar.animate([
+        { left: '16px', offset: 0.25 },
+        { left: '25px', offset: 0.50 },
+        { left: '6px', offset: 0.75 },
+        { left: '16px', offset: 1.0 }
+    ], {
+        duration: 300,
     });
-
-}
-document.getElementById('open-menu').addEventListener('click', () => {
-    document.body.style.overflowY = 'hidden';
-    document.getElementById('menu').style.left = '0';
-});
-document.getElementById('close-menu').addEventListener('click', () => {
-    document.body.style.overflowY = 'auto';
-    document.getElementById('menu').style.left = '-100%';
+    setTimeout(() => history.back(), 300);
 });
