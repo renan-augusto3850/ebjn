@@ -72,7 +72,7 @@ app.get('/js/:script', (req, res) => {
     const authUrl = auth.generateAuthUrl({
         access_type: 'offline', // Solicita um token de atualização
         scope: ['https://www.googleapis.com/auth/drive'],
-    });
+    })
     res.redirect(authUrl);
 });
 app.get('/userCallback', async(req, res) => {
@@ -203,10 +203,11 @@ app.post('/user', async(req, res) => {
     if(query.operation == "read-update") {
         const email = await sql`select email from loginsessions where id = ${query.id}`;
         await sql`INSERT INTO bookprogress (email, id, page, placeholder, date)
-        VALUES (${email[0].email}, ${query.id}, ${query.pageNumber}, ${query.placeholder}, ${query.date})
+        VALUES (${email[0].email}, ${query.id}, ${query.pageNumber}, ${query.placeholder}, ${new Date(query.date)})
         ON CONFLICT (email, placeholder) DO UPDATE
         SET page = ${query.pageNumber};
         `;
+        console.log(query);
         res.status(201).send({"Result": "ok"});
     }
     if(query.operation == "read-get") {

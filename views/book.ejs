@@ -22,7 +22,7 @@
 </head>
 <body>
   <nav>
-    <button class="voltar" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></button>
+    <button class="voltar" id="voltar"><i class="fa-solid fa-arrow-left"></i></button>
     <h1>EBJN</h1>
   </nav>
   <div class="blur" id="bookComplete">
@@ -39,6 +39,12 @@
         <img class="page" src="https://ebjn.serveo.net/PAGES/<%= placeholder%>/<%= placeholder + i%>.png">
       </div>
     <% }%>
+  </div>
+  <button class="bookMenu" id="bButton"><i class="fa-solid fa-book"></i></button>
+  <div class="book-menu" id="bm">
+    <button id="change-theme">Claro</button>
+  </div>
+
   </div>
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <link rel="stylesheet" href="/css/nprogress">
@@ -59,6 +65,7 @@
 </html>
 <script src="/js/turn"></script>
 <script src="/js/book"></script>
+<script src="/js/sIndex"></script>
 <script>
   function getMultiValueCookie(name) {
   const cookieArray = document.cookie.split('; ');
@@ -94,7 +101,7 @@
       let oldPage = $("#flipbook").turn("page");
       setInterval(() => {
           let actualPage = $("#flipbook").turn("page");
-          if(actualPage == 6) {
+          if(actualPage == <%=query[0].pages%>) {
               const query = {
                   operation: "read-finish",
                   medianInDays: '<%=query[0].medianindays%>',

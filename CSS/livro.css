@@ -1,17 +1,26 @@
+:root{
+    --background-color: rgb(255, 252, 157);
+    --nav-color: #1DA6E1;
+    --book-left: 15%;
+    --page-color: none;
+}
 body{
     height: 100vh;
     align-items: center;
-    background-color: chartreuse;
+    background-color: var(--background-color);
     overflow: hidden;
     font-family: sans-serif;
 }
-.page, .dark-page{
+nav{
+    background-color: var(--nav-color);
+}
+.page{
     background-color: white;
-    width: 400px;
+    width: 500px;
     height: 500px;
 }
-.dark-page > img{
-    filter: drop-shadow(16px 16px 20px red) invert(105%);
+.page > img{
+    filter: var(--page-color);
 }
 .blur{
     display: fixed;
@@ -37,12 +46,14 @@ body{
 #flipbook{
     position: absolute;
     top: 9px;
-    left: 0px;
+    left: var(--book-left);
 }
 @media (max-resolution: 1dppx) {
     @media (any-pointer: coarse) {
-        #flipbook{
-            left: 0%;
+        .page, .dark-page{
+            background-color: white;
+            width: 500px;
+            height: 1000px;
         }
     }
 }
@@ -55,8 +66,11 @@ body{
 .book-menu{
     position: absolute;
     display: none;
+    align-items: center;
+    justify-content: center;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
     background-color: white;
     padding: 26px 0 26px 0;
     width: 100px;
@@ -65,9 +79,14 @@ body{
     z-index: 9999;
 }
 .book-menu > button{
-    border: solid 1px black;
-    padding: 10px;
+    border-top: solid 0.5px black;
+    border-bottom: solid 0.5px black;
+    background: #ddd;
+    padding: 7px 2px;
     width: 100%;
+    border-radius: 2px;
+    cursor: pointer;
+    
 }
 button{
     background-color: transparent;

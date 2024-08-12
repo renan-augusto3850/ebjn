@@ -10,6 +10,7 @@ if(window.mobileCheck()) {
 	    autoCenter: true,
         display: 'single'
     });
+    document.documentElement.style.setProperty('--book-left', '0');
 } else {
     $("#flipbook").turn({
 	    width: 900,
@@ -21,7 +22,7 @@ var mode = 0;
 var isOpen  = 1;
 document.getElementById("bButton").addEventListener('click', () => {
     if(isOpen == 1) {
-        document.getElementById("bm").style.display = "block";
+        document.getElementById("bm").style.display = "flex";
         isOpen = 0;
     } else{
         document.getElementById("bm").style.display = "none";
@@ -30,18 +31,20 @@ document.getElementById("bButton").addEventListener('click', () => {
 });
 document.getElementById("change-theme").addEventListener('click', () => {
     if(mode == 0) {
-        const pages = document.querySelectorAll(".page");
-        pages.forEach(page => {
-            page.classList.add("dark-page");
-            page.classList.remove("page");
-        });
+        document.documentElement.style.setProperty('--background-color', 'rgb(255, 255, 255)');
+        document.documentElement.style.setProperty('--nav-color', 'rgb(22, 20, 0)');
+        document.documentElement.style.setProperty('--page-color', 'drop-shadow(16px 16px 20px red) invert(105%)');
         mode = 1;
     } else{
-        const pages = document.querySelectorAll(".dark-page");
-        pages.forEach(page => {
-            page.classList.add("page");
-            page.classList.remove("dark-page");
-        });
+        document.documentElement.style.setProperty('--background-color', 'rgb(255, 252, 157)');
+        document.documentElement.style.setProperty('--nav-color', '#1DA6E1');
+        document.documentElement.style.setProperty('--page-color', 'none');
         mode = 0;
     }
+});
+
+let themeBtn = document.getElementById("change-theme");
+themeBtn.addEventListener("click", () => {
+    const text = themeBtn.textContent;
+    themeBtn.textContent =  text === 'Claro'? 'Escuro' : 'Claro';
 });

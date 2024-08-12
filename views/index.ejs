@@ -24,28 +24,6 @@
     <body>
         <div id="menu">
             <button id="close-menu"><i class="fa-solid fa-arrow-left"></i></button>
-           <details>
-            <summary>Generos.</summary>
-            <p>Teste</p>
-           </details> 
-           <br>
-           <details>
-            <summary>Autores.</summary>
-            <p>Teste</p>
-           </details> 
-           <br>
-           <details>
-            <summary>Os mais lidos.</summary>
-            <p>Teste</p>
-           </details> 
-           <br>
-           <details>
-            <summary>Novidades.</summary>
-            <a href="/LIVRO/melhor-do-que-nos-filmes" class="simple-link">Melhor do que nos filmes - Lynn Painter</a>
-            <br>
-            <a href="/SERIE/estilhaca-me" class="simple-link">Estilhaça-me - Tahereh Mafi</a>
-           </details> 
-           <hr>
            <a href="https://jornaljoseneri.blogspot.com" target="_blank" class="simple-link">JJN</a>
            <br>
            <a href="/sobre" class="simple-link">Sobre</a>
@@ -65,7 +43,7 @@
         <div class="livros">
             <% for(let i = 0; i < query.length; i++) {%>
                 <div class="container">
-                    <img src="https://ebjn.serveo.net/PAGES/<%=query[i].placeholder%>/<%=query[i].placeholder + 1%>.png" alt="<%=query[i].title%>">
+                    <img src="https://ebjn.serveo.net/PAGES/<%=query[i].placeholder%>/<%=query[i].placeholder + 1%>.png" alt="<%=query[i].title%>" class="pulse">
                     <h6>Autor(a): <%= query[i].author%></h6>
                     <button class="primary-button" onclick="window.location.assign('/LIVRO/<%= query[i].placeholder%>')">Ler ></button>
                 </div>
