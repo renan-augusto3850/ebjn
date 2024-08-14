@@ -16,7 +16,7 @@ import Users from './users.js';
 const app = express();
 //const upload = multer();
 app.use(express.json());
-//app.use(cookieParser());
+//app.use(cookiearser());
 
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 PGPASSWORD = decodeURIComponent(PGPASSWORD);
@@ -63,6 +63,10 @@ app.get('/css/:stylesheet', (req, res) => {
     const archive = path.resolve(process.cwd(), `CSS/${stylesheet}.css`);
     res.sendFile(archive);
 });
+app.get('/booktest', (req, res) => {
+    const archive = path.resolve(process.cwd(), `test.html`);
+    res.sendFile(archive);
+});
 app.get('/js/:script', (req, res) => {
     const script = req.params.script;
     const archive = path.resolve(process.cwd(), `JS/${script}.js`);
@@ -72,9 +76,9 @@ app.get('/js/:script', (req, res) => {
     const authUrl = auth.generateAuthUrl({
         access_type: 'offline', // Solicita um token de atualização
         scope: ['https://www.googleapis.com/auth/drive'],
-    })
+    }
     res.redirect(authUrl);
-});
+
 app.get('/userCallback', async(req, res) => {
     const { code } = req.query;
     const id = req.cookies.username;

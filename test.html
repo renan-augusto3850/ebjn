@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<head>
+    <title>EBJN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index">
+    <link rel="stylesheet" href="/css/livro">
+    <link rel="manifest" href="/manifest">
+    <link rel="icon" href="/icon">
+    <meta name="theme-color" content="#1DA6E1"/>
+    <meta name="description" content="Biblioteca Digital da Escola Municipal José Neri de Oliveira.">
+    <meta name="author" content="Renan Augusto, Rosa Maria, Dafne Matias, Maria Yasmin">
+    <script src="https://kit.fontawesome.com/e77c01ed94.js" crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TGJ8RLB5P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-3TGJ8RLB5P');
+    </script>
+</head>
+<body>
+  <nav>
+    <button class="voltar" id="voltar"><i class="fa-solid fa-arrow-left"></i></button>
+    <h1>EBJN</h1>
+  </nav>
+  <div class="blur" id="bookComplete">
+    <div>
+        <i class="fa-solid fa-circle-half-stroke fa-beat" aria-hidden="true"></i>
+        <br>
+        <span>0.0</span>
+        <p>Parabens! Você ganhou <span>0.0</span> PNTS! Continue assim.</p>
+    </div>
+</div>
+  <div id="flipbook">
+      <div>
+        <img src="https://th.bing.com/th/id/R.6aecf21a00383a415afc914f2bcbd289?rik=phKxMWLceZ%2fkRQ&pid=ImgRaw&r=0" class="page">
+      </div>
+      <div>
+        <img src="https://th.bing.com/th/id/R.6aecf21a00383a415afc914f2bcbd289?rik=phKxMWLceZ%2fkRQ&pid=ImgRaw&r=0" class="page">
+      </div>
+      <div>
+        <img src="https://th.bing.com/th/id/R.6aecf21a00383a415afc914f2bcbd289?rik=phKxMWLceZ%2fkRQ&pid=ImgRaw&r=0" class="page">
+      </div>
+  </div>
+  <button class="bookBtn" id="bButton"><i class="fa-solid fa-book"></i>
+    <div class="book-menu" id="bm">
+        <div class="themeBtn" id="change-theme"><i class="fa-solid fa-sun"></i></div>
+        <div class="themeBtn" id="sepia-theme">Paginas Amarelas.</div>
+    </div>
+</button>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <link rel="stylesheet" href="/css/nprogress">
+        <script src="/js/nprogress"></script>
+        <script>
+            $('body').show();
+            $('.version').text(NProgress.version);
+            NProgress.start();
+            var interval = setInterval(() => NProgress.inc(), 1000);
+        </script>
+        <script>
+          $(window).on('load', () => {
+            clearInterval(interval);
+            NProgress.done();
+          });
+        </script>
+</body>
+</html>
+<script src="/js/turn"></script>
+<script src="/js/book"></script>
+<script src="/js/sIndex"></script>
+<script>
+  function getMultiValueCookie(name) {
+  const cookieArray = document.cookie.split('; ');
+  for (let i = 0; i < cookieArray.length; i++) {
+      const cookie = cookieArray[i].split('=');
+      if (cookie[0] === name) {
+          return cookie[1].split(',');
+      }
+  }
+  return null;
+  }
+  const user = getMultiValueCookie("username");
+  if(user) {
+      const id = user[0];
+      const query = {
+          operation: 'read-get',
+          id: id,
+          placeholder: '<%=query[0].placeholder%>'
+      };
+      fetch('/user', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(query)
+      }).then(response => response.json())
+          .then(page => {
+              console.log(page);
+              if(page.page.length != 0) {
+                  $("#flipbook").turn("page", page.page[0].page);
+              }
+      }).catch(error => console.error(error));
+      let oldPage = $("#flipbook").turn("page");
+      setInterval(() => {
+          let actualPage = $("#flipbook").turn("page");
+          if(actualPage == <%=query[0].pages%>) {
+              const query = {
+                  operation: "read-finish",
+                  medianInDays: '<%=query[0].medianindays%>',
+                  id: id,
+                  placeholder: '<%=placeholder%>',
+                  finishDate: new Date()
+              };
+              fetch('/user', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(query)
+              }).then(response => response.json())
+                  .then(data => {
+                      console.log("Finishing ...");
+                  console.log(data);
+                  if(data.result = "sucessfuly") {
+                      const pnts = document.querySelectorAll("span");
+                      pnts.forEach(element => {
+                          element.innerHTML = data.pnts;
+                      });
+                  }
+                  document.getElementById("bookComplete").style.display = 'block';
+                  setTimeout(() => window.location.assign('/'), 1000);
+              }).catch(error => console.error(error));
+          }
+          if(actualPage != oldPage) {
+              const data = {
+                  operation: "read-update",
+                  id: id,
+                  pageNumber: actualPage,
+                  placeholder: '<%=placeholder%>',
+                  date: new Date()
+              };
+              fetch('/user', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(data)
+              }).catch(error => console.error(error));
+              oldPage = actualPage;
+          }
+      }, 3000);
+  }
+</script>

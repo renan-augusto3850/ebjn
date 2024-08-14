@@ -18,33 +18,52 @@ if(window.mobileCheck()) {
 	    autoCenter: true
     });
 }
-var mode = 0;
+var darkMode = 0;
+var sepiaMode = 0;
 var isOpen  = 1;
-document.getElementById("bButton").addEventListener('click', () => {
-    if(isOpen == 1) {
-        document.getElementById("bm").style.display = "flex";
-        isOpen = 0;
-    } else{
-        document.getElementById("bm").style.display = "none";
-        isOpen = 1;
-    }
-});
+// document.getElementById("bButton").addEventListener('click', () => {
+//     if(isOpen == 1) {
+//         document.getElementById("bm").style.display = "flex";
+//         isOpen = 0;
+//     } else{
+//         document.getElementById("bm").style.display = "none";
+//         isOpen = 1;
+//     }
+// });
 document.getElementById("change-theme").addEventListener('click', () => {
-    if(mode == 0) {
+    if(darkMode == 0) {
         document.documentElement.style.setProperty('--background-color', 'rgb(255, 255, 255)');
         document.documentElement.style.setProperty('--nav-color', 'rgb(22, 20, 0)');
         document.documentElement.style.setProperty('--page-color', 'drop-shadow(16px 16px 20px red) invert(105%)');
-        mode = 1;
+        darkMode = 1;
     } else{
         document.documentElement.style.setProperty('--background-color', 'rgb(255, 252, 157)');
         document.documentElement.style.setProperty('--nav-color', '#1DA6E1');
         document.documentElement.style.setProperty('--page-color', 'none');
-        mode = 0;
+        darkMode = 0;
+    }
+});
+
+document.getElementById("sepia-theme").addEventListener('click', () => {
+    if(sepiaMode == 0) {
+        document.documentElement.style.setProperty('--page-color', 'sepia(1)');
+        sepiaMode = 1;
+    } else{
+        document.documentElement.style.setProperty('--page-color', 'none');
+        sepiaMode = 0;
     }
 });
 
 let themeBtn = document.getElementById("change-theme");
 themeBtn.addEventListener("click", () => {
-    const text = themeBtn.textContent;
-    themeBtn.textContent =  text === 'Claro'? 'Escuro' : 'Claro';
+    const text = themeBtn.innerHTML;
+    //themeBtn.textContent =  text === 'Claro'? 'Escuro' : 'Claro';
+    themeBtn.innerHTML =  text === '<i class="fa-solid fa-sun" aria-hidden="true"></i>' ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+    console.log(themeBtn.innerHTML);
+});
+
+let sepiaBtn = document.getElementById("sepia-theme");
+sepiaBtn.addEventListener("click", () => {
+    const text = sepiaBtn.textContent;
+    sepiaBtn.innerHTML =  text === 'Paginas Amarelas.'? 'Paginas Brancas.' : 'Paginas Amarelas.';
 });
