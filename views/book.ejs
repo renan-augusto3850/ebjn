@@ -40,12 +40,12 @@
       </div>
     <% }%>
   </div>
-  <button class="bookMenu" id="bButton"><i class="fa-solid fa-book"></i></button>
-  <div class="book-menu" id="bm">
-    <button id="change-theme">Claro</button>
-  </div>
-
-  </div>
+  <button class="bookBtn" id="bButton"><i class="fa-solid fa-book"></i>
+    <div class="book-menu" id="bm">
+        <div class="themeBtn" id="change-theme"><i class="fa-solid fa-sun"></i></div>
+        <div class="themeBtn" id="sepia-theme">Paginas Amarelas.</div>
+    </div>
+</button>   
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <link rel="stylesheet" href="/css/nprogress">
         <script src="/js/nprogress"></script>
@@ -101,7 +101,7 @@
       let oldPage = $("#flipbook").turn("page");
       setInterval(() => {
           let actualPage = $("#flipbook").turn("page");
-          if(actualPage == <%=query[0].pages%>) {
+          if(actualPage == <%=query[0].pages - 1%>) {
               const query = {
                   operation: "read-finish",
                   medianInDays: '<%=query[0].medianindays%>',
