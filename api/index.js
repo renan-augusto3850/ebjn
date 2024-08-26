@@ -11,6 +11,7 @@ import fs from 'fs';
 import { randomUUID } from 'crypto';
 import NProgress from 'nprogress';
 import Users from './users.js';
+import Books from './books.js';
 
 //const ebjn = new ebjnDrive();
 const app = express();
@@ -36,11 +37,9 @@ const sql = postgres({
 
 const range = new pageRange();
 
-const smart = new SmartSDK();
-let name;
 const users = new Users();
 
-const pdf = new pdfTools();
+const books = new Books();
 
 app.set('view engine', 'ejs');
 app.set(path.resolve(process.cwd(), 'views'));
@@ -66,6 +65,10 @@ app.get('/css/:stylesheet', (req, res) => {
 app.get('/booktest', (req, res) => {
     const archive = path.resolve(process.cwd(), `test.html`);
     res.sendFile(archive);
+});
+app.post('/search', async(req, res) => {
+    const query = req.body;
+    res.send(await books.search(query.search));
 });
 app.get('/js/:script', (req, res) => {
     const script = req.params.script;
@@ -109,13 +112,6 @@ app.get('/LIVRO/:placeholder', async(req, res) => {
             res.render('book', { placeholder, query });
     });
 });
-app.post('/book-list', async(req, res) => {
-    if(req.body.title) {
-        res.send(await sql`select * from books where title = ${req.body.title}`);
-    }else {
-        res.send(await sql`select * from books`); 
-    }
-});
 app.post('/book', async(req, res) => {
     const query = req.body;
     if(query.operation == "book-add") {
@@ -157,6 +153,15 @@ app.get('/IDADE/:idade', (req, res) => {
         .then(query => {
             const moderatedBooks = query.filter(livro => livro.age === idade.toUpperCase());
             res.render(idade, { moderatedBooks });
+    });
+});
+app.get('/book-list', (req, res) => {
+    fetch('https://ebjn.serveo.net/book-info', {
+        method: "POST"
+    })
+    .then(data => data.json())
+        .then(query => {    
+            res.send(query);
     });
 });
 app.get('/assets/:image', (req, res) => {
@@ -231,7 +236,6 @@ app.post('/user', async(req, res) => {
             ON CONFLICT (id) 
             DO UPDATE 
             SET pnts = pntstable.pnts + EXCLUDED.pnts`;
-            await sql`delete from bookprogress where id = ${query.id} and placeholder = ${query.placeholder}`;
             res.send({"result": "sucessfuly", "pnts": pnts});
         } else{
             res.statusCode = 500;

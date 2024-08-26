@@ -34,11 +34,12 @@
             <i class="fa-solid fa-bars" id="open-menu"></i>
             <h1>EBJN</h1>
            <button onclick="window.location.assign('/cadastro')" class="usuario" id="u"><i class="fa-solid fa-user-plus"></i></button>
+           <div class="search-predictions"><p>Nada!</p></div>
+           <div id="user-data">
+                <h2>Ola <span>user</span>!</h2>
+                <label id="pnts"><i class="fa-solid fa-circle-half-stroke"></i>0 Pnts.</label>
+            </div>
         </nav>
-        <div id="user-data">
-            <h2>Ola <span>user</span>!</h2>
-            <label id="pnts"><i class="fa-solid fa-circle-half-stroke"></i>0 Pnts.</label>
-        </div>
         <h2>Bem Vindo a EBJN</h2>
         <div class="livros">
             <% for(let i = 0; i < query.length; i++) {%>

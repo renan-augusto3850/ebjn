@@ -67,6 +67,7 @@
 <script src="/js/book"></script>
 <script src="/js/sIndex"></script>
 <script>
+  let firstRead = true;
   function getMultiValueCookie(name) {
   const cookieArray = document.cookie.split('; ');
   for (let i = 0; i < cookieArray.length; i++) {
@@ -96,12 +97,15 @@
               console.log(page);
               if(page.page.length != 0) {
                   $("#flipbook").turn("page", page.page[0].page);
+                  if(page.page === <%=query[0].pages - 1%>) {
+                    firstRead = false;
+                  }
               }
       }).catch(error => console.error(error));
       let oldPage = $("#flipbook").turn("page");
       setInterval(() => {
           let actualPage = $("#flipbook").turn("page");
-          if(actualPage == <%=query[0].pages - 1%>) {
+          if(actualPage == <%=query[0].pages - 1%> && !firstRead) {
               const query = {
                   operation: "read-finish",
                   medianInDays: '<%=query[0].medianindays%>',

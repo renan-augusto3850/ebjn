@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,700;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap%27%29%3B');
 :root{
     --blue: #1DA6E1;
     --yellow: #FFD321;
@@ -25,7 +26,7 @@ a{
     margin: 16px auto;
     font-weight: bold;
 }
-nav:focus-within ~ #user-data{
+button.usuario:focus-within + #user-data{
     display: block;
 }
 #user-data:hover{
@@ -40,6 +41,89 @@ nav:focus-within ~ #user-data{
     height: 100%;
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(2.5px);
+}
+.search{
+    color: white;
+    text-decoration: none;
+    font-size: 26px;
+    margin-left: -16px;
+    transition: .5s;
+}
+.search:hover{
+    color: rgb(221, 221, 221);
+    transform: scale(1.1);
+}
+.search-box{
+    position: absolute;
+    top: 50%;
+    right: 50px;
+    transform: translate(0, -50%);
+    height: 30px;
+    padding: 10px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.search-txt{
+    border: none;
+    background: none;
+    opacity: 0;
+    border: solid 0.7px var(--yellow);
+    border-radius: 10px;
+    outline: none;
+    padding: 0;
+    margin-right: 10px;
+    color: black;
+    background-color: white;
+    font-size: 14px;
+    line-height: 40px;
+    width: 0;
+    box-shadow: 0 2px 10px black;
+    transition: .5s;
+    font-family: Open Sans;
+}
+.search-txt:hover{
+    border: solid 1px var(--yellow);
+}
+::-webkit-input-placeholder{
+    color: black;
+}
+.search-btn{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+}
+.search-box:focus-within > .search-txt{
+    width: 240px;
+    opacity: 100%;
+    padding: 0 6px;
+    color: black;
+}
+.search-predictions{
+    position: fixed;
+    display: none;
+    background-color: white;
+    top: 56px;
+    right: 8px;
+}
+.search-box:focus-within ~ .search-predictions{
+    display: block;
+}
+.search-predictions > div{
+    display: flex;
+    color: black;
+    gap: 4px;
+    border: dotted 2px black;
+    align-items: center;
+}
+.search-predictions > div > img{
+    width: 100px;
 }
 .livro-box{
     background-color: white;
@@ -92,6 +176,7 @@ nav{
     background-color: white;
     width: 200px;
     border: solid 2px black;
+    color: black;
     height: 110px;
     padding: 5px;
     right: 5px;
@@ -290,4 +375,7 @@ nav > .voltar{
     padding: 10px 20px 10px 20px;
     border-radius: 20px;
     font-family: 'Rubik';
+}
+a{
+    text-decoration: none;
 }
