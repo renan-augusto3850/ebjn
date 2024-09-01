@@ -18,7 +18,7 @@ const searchInput = document.createElement('input');
 searchInput.type = 'text';
 searchInput.className = 'search-txt';
 searchInput.id = 'search-input';
-searchInput.placeholder = 'Pesquisar';
+searchInput.placeholder = 'Pesquisar...';
 
 const searchBtn = document.createElement('a');
 searchBtn.href = '#';
@@ -93,7 +93,7 @@ document.getElementById('search-input').addEventListener('input', (e) => {
             let page;
             results.forEach(book => {
                 page += `
-                <div><img src='https://ebjn.serveo.net/PAGES/${book.placeholder}/${book.placeholder}1.png'> <div style='display: block;'><h2>${book.title}</h2> <h3>${book.author}</h3></div></div> <a class='simple-link' href='/LIVRO/${book.placeholder}'>Ler ></a>'>
+                <div><img src='https://ebjn.serveo.net/PAGES/${book.placeholder}/${book.placeholder}1.png'> <div style='display: block;'><h2>${book.title}</h2> <h3>${book.author}</h3> <a class='simple-link' href='/LIVRO/${book.placeholder}'>Ler ></a></div></div>'>
                 `;
             });
             let searchPredictions = document.querySelector('.search-predictions');

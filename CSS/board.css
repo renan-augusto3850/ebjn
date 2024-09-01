@@ -1,0 +1,30 @@
+#board{
+    padding: 16px;
+    user-select: none;
+}
+#board > div{
+    background-color: white;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin: 16px;
+    padding: 4px;
+    border-radius: 16px;
+    width: 60%;
+    box-shadow: -10px 10px 44px 0px rgba(0,0,0,0.74);
+    -webkit-box-shadow: -10px 10px 44px 0px rgba(0,0,0,0.74);
+    -moz-box-shadow: -10px 10px 44px 0px rgba(0,0,0,0.74);
+}
+.sphere{
+    background-color: black;
+    border-radius: 100%;
+}
+#board > div:nth-child(1) > i {
+    color: yellow;
+}
+#board > div:nth-child(2) > i {
+    color: silver;
+}
+#board > div:nth-child(3) > i {
+    color: orangered;
+}

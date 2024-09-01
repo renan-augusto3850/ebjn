@@ -8,11 +8,17 @@
 body{
     text-align: center;
     width: 100%;
+    display: flex;
+    flex-direction: column;
     overflow-x: hidden;
     background-color: var(--yellow);
     padding-top: 50px;
     font-family: 'Roboto';
     margin-left: -3px;
+}
+img{
+    -webkit-user-drag: none;
+    -moz-window-dragging: none;
 }
 .simple-link{
     background-color: transparent; 
@@ -26,7 +32,7 @@ a{
     margin: 16px auto;
     font-weight: bold;
 }
-button.usuario:focus-within + #user-data{
+#u:focus-within ~ #user-data{
     display: block;
 }
 #user-data:hover{
@@ -47,17 +53,16 @@ button.usuario:focus-within + #user-data{
     text-decoration: none;
     font-size: 26px;
     margin-left: -16px;
-    transition: .5s;
 }
 .search:hover{
     color: rgb(221, 221, 221);
     transform: scale(1.1);
 }
-.search-box{
-    position: absolute;
-    top: 50%;
-    right: 50px;
-    transform: translate(0, -50%);
+.search-box {
+    position: fixed;
+    top: 35px;
+    right: 15px;
+    transform: translate(-50%, -50%);
     height: 30px;
     padding: 10px;
     border-radius: 40px;
@@ -65,11 +70,33 @@ button.usuario:focus-within + #user-data{
     justify-content: space-between;
     align-items: center;
 }
+.search-box:focus-within{
+    width: 100%;
+    height: 120%;
+    top: 40%;
+    left: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.search-box:focus-within > .search-txt {
+    width: 240px;
+    opacity: 100%;
+    padding: 0 6px;
+    color: black;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    z-index: 9999;
+    border: solid 0.7px var(--yellow);
+}
+.search-box:focus-within > .search-btn{
+    opacity: 0;
+    transition: opacity 0.5s;
+}
 .search-txt{
     border: none;
     background: none;
     opacity: 0;
-    border: solid 0.7px var(--yellow);
     border-radius: 10px;
     outline: none;
     padding: 0;
@@ -80,14 +107,17 @@ button.usuario:focus-within + #user-data{
     line-height: 40px;
     width: 0;
     box-shadow: 0 2px 10px black;
-    transition: .5s;
+    transition: opacity 0.5s ease-in, background 0.5s ease-in;
     font-family: Open Sans;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .search-txt:hover{
     border: solid 1px var(--yellow);
 }
-::-webkit-input-placeholder{
-    color: black;
+.search-txt::-webkit-input-placeholder{
+    color: rgba(0, 0, 0, 0.47);
 }
 .search-btn{
     height: 30px;
@@ -97,20 +127,17 @@ button.usuario:focus-within + #user-data{
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: .5s;
-}
-.search-box:focus-within > .search-txt{
-    width: 240px;
-    opacity: 100%;
-    padding: 0 6px;
-    color: black;
+    transition: opacity .5s;
 }
 .search-predictions{
     position: fixed;
     display: none;
     background-color: white;
-    top: 56px;
-    right: 8px;
+    top: 21%;
+    right: 50%;
+    height: 450px;
+    transform: translate(50%, 0);
+    overflow: scroll;
 }
 .search-box:focus-within ~ .search-predictions{
     display: block;
@@ -119,8 +146,9 @@ button.usuario:focus-within + #user-data{
     display: flex;
     color: black;
     gap: 4px;
-    border: dotted 2px black;
+    border: dotted 2px rgba(0, 0, 0, 0.479);
     align-items: center;
+    margin: 0 10px;
 }
 .search-predictions > div > img{
     width: 100px;
@@ -180,6 +208,7 @@ nav{
     height: 110px;
     padding: 5px;
     right: 5px;
+    top: 15%;
 }
 #menu{
     position: fixed;
@@ -223,7 +252,7 @@ nav > .fa-bars{
 nav > .usuario{
     position: absolute;
     right: 16px;
-    top: 20%;
+    top: 25%;
     font-size: 26px;
     color: white;
 }

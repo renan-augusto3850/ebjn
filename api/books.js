@@ -10,7 +10,7 @@ export default class Books {
         })
         .then(data => data.json())
         .then(books => {
-            filteredBook = books.filter(book => book.title.toLowerCase().includes(query));
+            filteredBook = books.filter(book => book.title.toLowerCase().includes(query) || book.author.toLowerCase().includes(query));
             return filteredBook;
         });
     }

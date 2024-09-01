@@ -177,6 +177,35 @@ app.get('/upload', (req, res) => {
     const archive = path.resolve(process.cwd(), 'upload.html');
     res.sendFile(archive);
 });
+app.get('/placar', async(req, res) => {
+    const bookProgress = await sql`select * from bookprogress`;
+    const userReadCounts = bookProgress.reduce((acc, curr) => {
+        if (!acc[curr.email]) {
+          acc[curr.email] = { email: curr.email, readedBooks: 0 };
+        }
+        acc[curr.email].readedBooks += 1;
+        return acc;
+    }, {});
+
+    let ranking = Object.values(userReadCounts).sort((a, b) => b.readedBooks - a.readedBooks);
+
+    const namePromises = ranking.map(user => 
+        users.getNameByEmail(user.email, sql).then(name => ({
+            name,
+            email: user.email,
+            readedBooks: user.readedBooks
+        }))
+    );
+
+    Promise.all(namePromises)
+        .then(ranking => {
+            res.render('globalboard', { ranking });
+        })
+        .catch(err => {
+            console.error("Error loading user names:", err);
+            res.status(500).send("Error loading ranking.");
+        });
+});
 app.get('/sobre', (req, res) => {
     const archive = path.resolve(process.cwd(), 'sobre.html');
     res.sendFile(archive);
