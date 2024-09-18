@@ -11,10 +11,16 @@ function setCookie(name, value, daysToExpire, isHttpOnly) {
         document.cookie = cookieValue;
     }
 }
+function setTime(days) {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + days);
+    return expirationDate;
+}
 document.getElementById('cadastrar').addEventListener('click', () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('senha').value;
-    const data = {email: email, password: password, operation: 'enter'};
+    const data = {email: email, password: password, operation: 'enter', expireDate: setTime(30)};
+    console.log(data);
     fetch('/login', {
         method: 'POST',
         headers: {

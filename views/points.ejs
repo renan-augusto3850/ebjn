@@ -3,7 +3,7 @@
     <title>EBJN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/index">
-    <link rel="stylesheet" href="/css/board">
+    <link rel="stylesheet" href="/css/cadastro">
     <link rel="stylesheet" href="/css/nprogress">
     <link rel="manifest" href="/manifest">
     <link rel="icon" href="/icon">
@@ -27,6 +27,8 @@
             <button id="close-menu"><i class="fa-solid fa-arrow-left"></i></button>
            <a href="https://jornaljoseneri.blogspot.com" target="_blank" class="simple-link">JJN</a>
            <br>
+           <a class="simple-link" href="/placar">Placar</a>
+           <br>
            <a href="/sobre" class="simple-link">Sobre</a>
            <br>
            <a href="/termos-de-servico" class="simple-link">Termos de uso</a>
@@ -41,16 +43,27 @@
                 <label id="pnts"><i class="fa-solid fa-circle-half-stroke"></i>0 Pnts.</label>
             </div>
         </nav>
-        <h2>Placar mensal da EBJN</h2>
-        <div id="board">
-            <%for(let i = 0; i < ranking.length; i++){%>
-                <div>
-                    <i class="fa-solid fa-trophy"></i>
-                    <h2><%=ranking[i].name%></h2>
-                    <p>Livros: <%=ranking[i].readedBooks%></p>
-                </div>
-            <%}%>
+        <h2>Olá, vamos enviar seus pontos, eles serão convertidos para nota bimestral de forma extra!</h2>
+        <div class="cadastro-box">
+            <select id="subject">
+                <option>Selecione a materia</option>
+                <option value="Português">Português</option>
+                <option value="Redação">Redação</option>
+            </select>
+            <br>
+            <input id="pnts-form" type="number" step="0.1" placeholder="Digite a quantidade de PNTS:">
+            <br>
+            <select id="serie">
+                <option>Serie:</option>
+                <option value="6">6°</option>
+                <option value="7">7°</option>
+                <option value="8">8°</option>
+                <option value="9">9°</option>
+            </select>
+            <br>
+            <button class="primary-button" id="send-pnts">Enviar ></button>
         </div>
     </body>
 </html>
+<script src="/js/points"></script>
 <script src="/js/index"></script>

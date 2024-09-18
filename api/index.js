@@ -1,15 +1,9 @@
 import express from 'express';
 import path from 'path';
 import postgres from 'postgres';
-import multer from 'multer';
 import bcrypt from 'bcrypt';
 import 'dotenv/config';
 import pageRange from '../pageRange.js';
-import pdfTools from './pdfTools.js';
-import SmartSDK from '../smartSDK.js';
-import fs from 'fs';
-import { randomUUID } from 'crypto';
-import NProgress from 'nprogress';
 import Users from './users.js';
 import Books from './books.js';
 
@@ -75,21 +69,6 @@ app.get('/js/:script', (req, res) => {
     const archive = path.resolve(process.cwd(), `JS/${script}.js`);
     res.sendFile(archive);
 });
-/*app.get('/googleLogin', (req, res) => {
-    const authUrl = auth.generateAuthUrl({
-        access_type: 'offline', // Solicita um token de atualização
-        scope: ['https://www.googleapis.com/auth/drive'],
-    }
-    res.redirect(authUrl);
-
-app.get('/userCallback', async(req, res) => {
-    const { code } = req.query;
-    const id = req.cookies.username;
-    const { tokens } = await auth.getToken(code);
-    google.options({ auth });
-    wait sql`insert into googleoauth (authToken, id) values(${cryptoJS.AES.encrypt(JSON.stringify(tokens), id).toString()}, "nothing" )`;
-    res.redirect("/");
-});*/
 app.get('/PAGES/:endereco/:page', (req, res) => {
     const add = req.params.endereco;
     const page = req.params.page;
@@ -230,7 +209,7 @@ app.post('/login', async(req, res) => {
     const hashedPasssword = query[0].password;
     if(await bcrypt.compare(usuario.password, hashedPasssword)) {
         const id = crypto.randomUUID();
-        await sql`insert into loginsessions (email, id, name) values(${usuario.email}, ${id}, ${usuario.name})`;
+        await sql`insert into loginsessions (email, id, name, expiredate) values(${usuario.email}, ${id}, ${usuario.name}, ${usuario.expireDate})`;
         res.send({"result": true, id: id, name: usuario.name});
     } else{
         res.send({"result": false});
@@ -254,6 +233,8 @@ app.post('/user', async(req, res) => {
         res.send({result: "sucessfuly", page: page});
     }
     if(query.operation == "read-finish") {
+        const id = await users.getIdBySessionId(query, sql);
+        console.log("ID:", id);
         const umDiaEmMilissegundos = 24 * 60 * 60 * 1000;
         const email = await sql`select email from loginsessions where id = ${query.id}`;
         const startDate = await sql`select date from bookprogress where email = ${email[0].email} and placeholder = ${query.placeholder}`;
@@ -261,7 +242,7 @@ app.post('/user', async(req, res) => {
         if(query.finishDate != undefined) {
             const pnts = range.gerarPontuação(medianReadDate, query.finishDate);
             await sql`INSERT INTO pntstable (id, pnts)
-            VALUES (${query.id}, ${pnts.toFixed(1)})
+            VALUES (${id}, ${pnts.toFixed(1)})
             ON CONFLICT (id) 
             DO UPDATE 
             SET pnts = pntstable.pnts + EXCLUDED.pnts`;
@@ -271,10 +252,13 @@ app.post('/user', async(req, res) => {
         }
     }
     if(query.operation == "pnts-get") {
+        query.id = await users.getIdBySessionId(query, sql);
         const pnts = await sql`select pnts from pntstable where id = ${query.id}`;
         res.send(pnts);
     }
     if(query.operation == "pnts-add") {
+        query.id = await users.getIdBySessionId(query, sql);
+        console.log("ID:", query.id);
         await sql`INSERT INTO pntstable (id, pnts)
         VALUES (${query.id}, ${parseFloat(query.pnts)})
         ON CONFLICT (id) 
@@ -282,11 +266,23 @@ app.post('/user', async(req, res) => {
         SET pnts = pntstable.pnts + EXCLUDED.pnts`;
         res.send({result: "sucessfuly"});
     }
+    if(query.operation == "pnts-send") {
+        query.id = await users.getIdBySessionId(query, sql);
+        await users.sendPNTS(query, sql);
+        res.status(200);
+    }
     if(query.operation == "is-contribuitor") {
         req.body.email = await users.getEmailBySessionId(req.body, sql);
-        const result = await users.isContribuitor(req.body, sql);
-        res.send({ result })
+        if(req.body.email != "logout") {
+            const result = await users.isContribuitor(req.body, sql);
+            res.send({ result });
+        } else {
+            res.send({logout: true});
+        }
     }
+});
+app.get('/enviar-pnts', (req, res) => {
+    res.render('points');
 });
 app.get('/login', (req, res) => {
     const archive = path.resolve(process.cwd(), 'login.html');

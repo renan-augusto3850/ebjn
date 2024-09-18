@@ -9,7 +9,31 @@ function getMultiValueCookie(name) {
     }
     return null;
 }
-
+function setCookie(name, value, daysToExpire, isHttpOnly) {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + daysToExpire);
+    if(isHttpOnly === true){
+        const cookieValue = `${name}=${value}; expires=${expirationDate.toUTCString()}; path=/; domain=renansites.rf.gd; HttpOnly;`;
+        document.cookie = cookieValue;
+        console.log("Secured HttpOnly cookie is created!");
+    }
+    else {
+        const cookieValue = `${name}=${value}; expires=${expirationDate.toUTCString()}; path=/;`;  
+        document.cookie = cookieValue;
+    }
+}
+const voltar = document.getElementById('voltar');
+voltar?.addEventListener('click', () => {
+    voltar.animate([
+        { left: '16px', offset: 0.25 },
+        { left: '25px', offset: 0.50 },
+        { left: '6px', offset: 0.75 },
+        { left: '16px', offset: 1.0 }
+    ], {
+        duration: 300,
+    });
+    setTimeout(() => history.back(), 300);
+});
 // Cria a estrutura da barra de pesquisa
 const searchBox = document.createElement('div');
 searchBox.className = 'search-box';
@@ -37,6 +61,7 @@ const userIcon = document.querySelector('#u');
 userIcon.parentNode.insertBefore(searchBox, userIcon);
 
 const cookie = getMultiValueCookie('username');
+var pntsGlobal;
 if(cookie) {
     document.querySelector('span').innerHTML = cookie[1];
     const userButton = document.getElementById('u');
@@ -48,13 +73,15 @@ if(cookie) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({operation: "pnts-get", id: cookie[0]})
+        body: JSON.stringify({operation: "is-contribuitor", id: cookie[0]})
     }).then(response => response.json())
         .then(result => {
-            console.log(result.result);
-            if(result[0].pnts){
-                document.getElementById('pnts').innerHTML = `<i class="fa-solid fa-circle-half-stroke"></i>${result[0].pnts} Pnts.`;
-            }
+           if(result.result) {
+            document.getElementById('user-data').innerHTML += '<br> <a href="https://ebjn.serveo.net" target="_blank" class="simple-link">Cadastrar livros.</a>';
+           } else{
+            setCookie('username', 'invalid', -3, false);
+            window.location.assign('/login');
+           }
     }).catch(error => console.error(error));
 
     fetch('/user', {
@@ -62,12 +89,14 @@ if(cookie) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({operation: "is-contribuitor", id: cookie[0]})
+        body: JSON.stringify({operation: "pnts-get", id: cookie[0]})
     }).then(response => response.json())
         .then(result => {
-           if(result.result) {
-            document.getElementById('user-data').innerHTML += '<br> <a href="https://ebjn.serveo.net" target="_blank" class="simple-link">Cadastrar livros.</a>';
-           }
+            console.log(result.result);
+            if(result[0].pnts){
+                document.getElementById('pnts').innerHTML = `<i class="fa-solid fa-circle-half-stroke"></i>${result[0].pnts} Pnts.`;
+                pntsGlobal = parseFloat(result[0].pnts);
+            }
     }).catch(error => console.error(error));
 
 }
