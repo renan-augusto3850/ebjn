@@ -17,9 +17,9 @@ document.getElementById('cadastrar').addEventListener('click', () => {
     const password = document.getElementById('senha').value;
     const name = document.getElementById('name').value;
     const serie = document.getElementById('serie').value;
-    const data = {email, password, name, serie, type};
+    const data = {operation: 'create-user', email, password, name, serie, type};
     console.log(data);
-    fetch('/usuario', {
+    fetch('/user', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

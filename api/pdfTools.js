@@ -8,7 +8,6 @@ export default class pdfTools{
         const sampleTitle = smart.placeholdify(title);
         fs.mkdirSync(`./PAGES/${sampleTitle}`);
         const command = `mutool convert -o ./PAGES/${sampleTitle}/${sampleTitle}.png ${path}`;
-        console.log(command);
         exec(command);
     }
 }

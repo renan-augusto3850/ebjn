@@ -12,7 +12,6 @@ nav > .voltar{
     cursor: pointer;
 }
 .cadastro-box{
-    border: solid 2px black;
     border-radius: 15px;
     background-color: white;
     width: 500px;
@@ -65,7 +64,6 @@ input:focus{
     color: white;
     font-family: 'Roboto';
     font-weight: bolder;
-    width: 66px;
-    height: 36px;
+    padding: 10px;
     border-radius: 20px;
 }

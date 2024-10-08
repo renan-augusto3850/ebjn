@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <title>EBJN - Controle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index">
+    <link rel="stylesheet" href="/css/controler">
+    <link rel="manifest" href="/manifest">
+    <link rel="icon" href="/icon">
+    <meta name="theme-color" content="#1DA6E1"/>
+    <meta name="description" content="Biblioteca Digital da Escola Municipal José Neri de Oliveira.">
+    <meta name="author" content="Renan Augusto, Rosa Maria, Dafne Matias, Maria Yasmin">
+    <script src="https://kit.fontawesome.com/e77c01ed94.js" crossorigin="anonymous"></script>
+    <script src="https://renansites.rf.gd/smart/main.js"></script>
+</head>
+<html lang="pt-br">
+    <body>
+        <nav>
+            <button class="voltar" id="voltar"><i class="fa-solid fa-arrow-left"></i></button>
+            <h1>EBJN</h1>
+           <button onclick="window.location.assign('/cadastro')" class="usuario" id="u"><i class="fa-solid fa-user-plus"></i></button>
+        </nav>
+        <h2>Ola, seja bem vinda.</h2>
+        <h3>Registro de PNTS:</h3>
+        <table id="consult-list">
+            <tr>
+            <th>Nome</th>
+            <th>Serie:</th>
+            <th>Matéria:</th>
+            <th>PNTS:</th>
+            </tr>
+            <%pnts.forEach(person => {%>
+                <tr>
+                    <th><%=person.name%></th>
+                    <th><%=person.serie%></th>
+                    <th><%=person.subject%></th>
+                    <th><%=person.pnts%></th>
+                </tr>
+            <%});%>
+        </table>
+        <button id="limpar"><i class="fa-solid fa-trash"></i></button>
+    </body>
+</html>
+<script src="/js/sIndex"></script>
+<script src="/js/pntsAcess"></script>
