@@ -41,21 +41,13 @@ app.set('view engine', 'ejs');
 app.set(path.resolve(process.cwd(), 'views'));
 
 app.get('/', async(req, res) => {
-    // fetch('https://ebjn.serveo.net/books', {
-    //     method: "POST"
-    // })
-    // .then(data => data.json())
-    //     .then(query => {
-    //         res.render('index', { query });
-    // });
-    const query = [
-        {
-            title: 'Test',
-            placeholder: 'test',
-            author: 'Renan'
-        }
-    ];
-    res.render('index', { query });
+     fetch('https://ebjn.serveo.net/books', {
+        method: "POST"
+     })
+     .then(data => data.json())
+         .then(query => {
+             res.render('index', { query });
+     });
 });
 app.get('/termos-de-servico', (req, res) => {
     const archive = path.resolve(process.cwd(), 'terms.html');
